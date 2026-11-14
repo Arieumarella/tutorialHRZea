@@ -1,0 +1,24 @@
+services:
+  tutorial:
+    image: nginx:alpine
+    container_name: zea-tutorial
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8088:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    networks:
+      - tutorial-net
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: zea-tutorial-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - tutorial
+    networks:
+      - tutorial-net
+
+networks:
+  tutorial-net:

@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Lengkap Zea HR — Web Admin & Aplikasi Mobile</title>
+<style>
+:root{
+  --green-900:#063d2c;--green-800:#074a36;--green:#0b6e4f;--green-500:#1fa67b;
+  --green-100:#e6f4ee;--green-50:#f1faf6;--amber:#e9a23b;--amber-50:#fff7e8;
+  --red:#d64545;--red-50:#fdeeee;--blue:#2563eb;--blue-50:#eff5ff;
+  --purple:#7c3aed;--purple-50:#f5f0ff;--ink:#0f1f1a;--muted:#5b6b65;
+  --line:#e2e9e5;--bg:#f5f8f6;--card:#fff;
+  --shadow-sm:0 1px 2px rgba(9,40,30,.06),0 4px 14px rgba(9,40,30,.05);
+  --shadow-md:0 10px 30px rgba(9,40,30,.10);
+  --shadow-lg:0 30px 70px rgba(9,40,30,.18);
+  --font:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--green-500);color:#fff}
+.ic{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* NAVBAR */
+.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(255,255,255,.86);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,var(--green-500),var(--green-800));display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;box-shadow:0 6px 16px rgba(11,110,79,.28)}
+.brand small{display:block;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;line-height:1}
+.brand span{font-size:15px;line-height:1.2}
+.topnav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.topnav a{font-size:13px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:9px;transition:.18s}
+.topnav a:hover{background:var(--green-50);color:var(--green)}
+.topnav a.active{background:var(--green-100);color:var(--green-800)}
+.topbar-cta{font-size:12.5px;font-weight:700;color:#fff;background:var(--green);padding:9px 16px;border-radius:10px;white-space:nowrap;box-shadow:0 6px 16px rgba(11,110,79,.22);transition:.18s}
+.topbar-cta:hover{background:var(--green-800);transform:translateY(-1px)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:radial-gradient(900px 420px at 12% -10%,rgba(31,166,123,.28),transparent 60%),radial-gradient(700px 500px at 92% 0%,rgba(233,162,59,.16),transparent 55%),linear-gradient(160deg,#063d2c 0%,#074a36 45%,#0b6e4f 100%);color:#fff}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 78%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:72px 24px 84px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:999px;color:#d8f3e8;margin-bottom:22px}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#5ee0a9;box-shadow:0 0 0 4px rgba(94,224,169,.2)}
+.hero h1{font-size:clamp(34px,5.2vw,58px);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:820px}
+.hero h1 em{font-style:normal;color:#8ff0c4}
+.hero p.lead{margin-top:20px;max-width:660px;font-size:16px;color:#c8e6da}
+.hero-actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-weight:700;font-size:14px;transition:.18s}
+.btn-primary{background:#fff;color:var(--green-800);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.24)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.24)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;max-width:760px}
+.hero-stats div{background:rgba(6,61,44,.35);padding:18px 20px;backdrop-filter:blur(4px)}
+.hero-stats strong{display:block;font-size:23px;font-weight:800;letter-spacing:-.02em}
+.hero-stats span{font-size:11.5px;color:#a9d6c4;font-weight:600}
+
+/* LAYOUT */
+main{max-width:1180px;margin:0 auto;padding:0 24px 90px}
+section,article{scroll-margin-top:90px}
+.chapter{display:flex;align-items:center;gap:14px;margin:70px 0 10px}
+.chapter .num{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:15px;flex:none}
+.chapter.web .num{background:var(--green-100);color:var(--green-800)}
+.chapter.mobile .num{background:var(--blue-50);color:var(--blue)}
+.chapter h2{font-size:clamp(24px,3.2vw,32px);letter-spacing:-.025em;line-height:1.15}
+.chapter p{font-size:13.5px;color:var(--muted)}
+.chapter-kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:2px}
+.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 8px}
+.subnav a{font-size:12.5px;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:999px;transition:.16s}
+.subnav a:hover{border-color:var(--green-500);color:var(--green);background:var(--green-50)}
+
+/* FEATURE */
+.feature{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:var(--shadow-sm)}
+.feature-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.feature-num{width:44px;height:44px;border-radius:13px;flex:none;display:grid;place-items:center;font-weight:800;font-size:15px;background:var(--green-50);color:var(--green);border:1px solid var(--green-100)}
+.feature-head h3{font-size:21px;letter-spacing:-.02em;line-height:1.25}
+.feature-head .path{display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:3px 9px}
+.feature-lead{color:var(--muted);font-size:14px;margin-top:14px;max-width:820px}
+.feature-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;margin-top:26px;align-items:start}
+.panel-label{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.panel-label::before{content:"";width:16px;height:2px;border-radius:2px;background:var(--green-500)}
+
+/* BROWSER MOCK */
+.browser{border-radius:16px;overflow:hidden;border:1px solid #cfe0d8;background:#fff;box-shadow:var(--shadow-md)}
+.browser-bar{display:flex;align-items:center;gap:8px;padding:9px 12px;background:linear-gradient(#f6f8f7,#eef3f0);border-bottom:1px solid #dde7e2}
+.browser-bar .dots{display:flex;gap:5px}
+.browser-bar .dots i{width:9px;height:9px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#f87171}
+.dots i:nth-child(2){background:#fbbf24}
+.dots i:nth-child(3){background:#34d399}
+.browser-bar .url{flex:1;background:#fff;border:1px solid #e2e9e5;border-radius:999px;font-size:9.5px;color:#7b8a84;padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser-body{display:flex;min-height:340px;font-size:10.5px}
+.side{width:158px;flex:none;background:#fbfdfc;border-right:1px solid #e8efeb;padding:12px 8px;display:flex;flex-direction:column;gap:2px}
+.side-brand{display:flex;align-items:center;gap:7px;padding:4px 7px 12px}
+.side-brand b{width:21px;height:21px;border-radius:7px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:9px}
+.side-brand span{font-size:10px;font-weight:800;letter-spacing:-.01em}
+.side-item{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:7px;color:#5b6b65;font-size:9.5px;font-weight:600}
+.side-item .ic{width:11px;height:11px}
+.side-item.active{background:var(--green-100);color:var(--green-800)}
+.side-item.sub{padding-left:20px;font-size:9px}
+.side-item.sub.active{background:var(--green);color:#fff}
+.side-group{font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9aa8a2;padding:9px 8px 3px}
+.main-mock{flex:1;background:#f7faf8;padding:13px 14px;min-width:0}
+.mock-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.mock-head h4{font-size:13.5px;letter-spacing:-.01em;line-height:1.2}
+.mock-head p{font-size:9px;color:#7b8a84;margin-top:2px}
+.mock-btn{display:inline-flex;align-items:center;gap:4px;background:var(--green);color:#fff;font-size:8.5px;font-weight:700;padding:5px 9px;border-radius:6px;white-space:nowrap}
+.mock-btn.alt{background:#fff;color:var(--green);border:1px solid #cfe0d8}
+.mock-btn.red{background:var(--red)}
+.mock-btn.gray{background:#eef3f0;color:#5b6b65}
+.mock-section{font-size:8px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#93a29c;margin:10px 0 6px}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.stat-grid.three{grid-template-columns:repeat(3,1fr)}
+.stat{border-radius:9px;padding:8px 9px;line-height:1.25}
+.stat b{display:block;font-size:14px;letter-spacing:-.02em;margin-top:1px}
+.stat span{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
+.stat small{display:block;font-size:7px;opacity:.7;margin-top:1px}
+.stat.blue{background:#eaf2ff;color:#1d4ed8}
+.stat.green{background:#e7f7ee;color:#0f7a45}
+.stat.amber{background:#fff4df;color:#a16207}
+.stat.purple{background:#f2ecfe;color:#6d28d9}
+.stat.red{background:#fdeaea;color:#b91c1c}
+.stat.gray{background:#eef3f0;color:#42524b}
+
+/* TABLE MOCK */
+.mock-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e8efeb;border-radius:9px;overflow:hidden}
+.mock-table th{font-size:7.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#8b9a94;text-align:left;padding:7px 8px;background:#f4f8f6;border-bottom:1px solid #e8efeb;white-space:nowrap}
+.mock-table td{font-size:8.5px;padding:7px 8px;border-bottom:1px solid #f0f5f2;color:#3d4b45;vertical-align:middle}
+.mock-table tr:last-child td{border-bottom:0}
+.mock-table .name{font-weight:700;color:#122a22}
+.mock-table .sub{display:block;font-size:7px;color:#8b9a94;font-weight:500;margin-top:1px}
+.mock-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.mock-table .center{text-align:center}
+.pill{display:inline-flex;align-items:center;gap:3px;font-size:7.5px;font-weight:800;letter-spacing:.02em;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.pill.green{background:#e7f7ee;color:#0f7a45}
+.pill.amber{background:#fff4df;color:#a16207}
+.pill.red{background:#fdeaea;color:#b91c1c}
+.pill.blue{background:#eaf2ff;color:#1d4ed8}
+.pill.purple{background:#f2ecfe;color:#6d28d9}
+.pill.gray{background:#eef3f0;color:#5b6b65}
+.pill .d{width:4px;height:4px;border-radius:50%;background:currentColor}
+.mock-toolbar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.mock-input{display:flex;align-items:center;gap:4px;background:#fff;border:1px solid #dde7e2;border-radius:6px;padding:4px 7px;font-size:8px;color:#93a29c;min-width:0}
+.mock-input .ic{width:9px;height:9px}
+.mock-input.fill{flex:1}
+
+/* MAP */
+.map-mock{position:relative;height:150px;border-radius:10px;overflow:hidden;background:radial-gradient(120px 90px at 68% 45%,rgba(31,166,123,.16),transparent 70%),repeating-linear-gradient(0deg,transparent 0 26px,rgba(120,150,138,.12) 26px 27px),repeating-linear-gradient(90deg,transparent 0 26px,rgba(120,150,138,.12) 26px 27px),linear-gradient(160deg,#eef6f1,#e3efe9);border:1px solid #dbe8e1}
+.map-mock::before,.map-mock::after{content:"";position:absolute;background:#d7e6de}
+.map-mock::before{left:0;right:0;top:58%;height:7px;transform:rotate(-4deg)}
+.map-mock::after{top:0;bottom:0;left:38%;width:6px;transform:rotate(6deg)}
+.geofence{position:absolute;left:50%;top:47%;width:96px;height:96px;transform:translate(-50%,-50%);border-radius:50%;background:rgba(31,166,123,.16);border:2px dashed rgba(11,110,79,.5);animation:glow 3s ease-in-out infinite}
+.map-pin{position:absolute;left:50%;top:47%;width:16px;height:16px;transform:translate(-50%,-50%);background:var(--green);border:3px solid #fff;border-radius:50%;box-shadow:0 4px 10px rgba(11,110,79,.4)}
+.map-chip{position:absolute;left:7px;top:7px;background:rgba(255,255,255,.94);border-radius:6px;padding:3px 7px;font-size:7.5px;font-weight:700;color:#0b6e4f;box-shadow:0 2px 6px rgba(9,40,30,.1)}
+.map-zoom{position:absolute;right:7px;bottom:7px;display:flex;flex-direction:column;gap:2px}
+.map-zoom i{width:16px;height:16px;background:#fff;border-radius:4px;display:grid;place-items:center;font-size:9px;font-style:normal;color:#5b6b65;box-shadow:0 2px 6px rgba(9,40,30,.12)}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(31,166,123,.16)}50%{box-shadow:0 0 0 14px rgba(31,166,123,0)}}
+/* FORM MOCK */
+.mock-form{display:grid;gap:7px}
+.mock-form.two{grid-template-columns:1fr 1fr}
+.mock-form.three{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.field label{font-size:7.5px;font-weight:700;color:#5b6b65}
+.field .input{background:#fff;border:1px solid #dde7e2;border-radius:6px;padding:5px 7px;font-size:8.5px;color:#243b33;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.field .input.ph{color:#9aa8a2}
+.field .input.money{display:flex;justify-content:space-between;gap:4px}
+.field .input.money .rp{color:#93a29c}
+.field.wide{grid-column:1/-1}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
+.chip{font-size:7.5px;font-weight:700;padding:3px 7px;border-radius:5px;background:#fff;border:1px solid #dde7e2;color:#5b6b65}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.toggles{display:flex;gap:12px;flex-wrap:wrap;margin-top:2px}
+.toggle{display:flex;align-items:center;gap:4px;font-size:8px;font-weight:600;color:#42524b}
+.sw{width:18px;height:10px;border-radius:999px;background:var(--green-500);position:relative;flex:none}
+.sw::after{content:"";position:absolute;right:1.5px;top:1.5px;width:7px;height:7px;border-radius:50%;background:#fff}
+.sw.off{background:#cdd8d3}
+.sw.off::after{left:1.5px;right:auto}
+.card-mock{background:#fff;border:1px solid #e8efeb;border-radius:10px;padding:9px 10px}
+.card-mock h5{font-size:9px;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.card-mock h5 .ic{width:10px;height:10px;color:var(--green)}
+
+/* TABS */
+.tabs{display:flex;gap:3px;border-bottom:1px solid #e8efeb;margin-bottom:9px;flex-wrap:wrap}
+.tab-btn{font-family:inherit;cursor:pointer;border:0;background:transparent;font-size:8.5px;font-weight:700;color:#8b9a94;padding:6px 8px;border-bottom:2px solid transparent;transition:.15s}
+.tab-btn:hover{color:var(--green)}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+/* STEPS */
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.step{position:relative;padding:11px 13px 11px 46px;background:var(--green-50);border:1px solid #dcefe6;border-radius:12px;font-size:12.5px;color:#2c433a;line-height:1.55}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-size:10.5px;font-weight:800;display:grid;place-items:center;box-shadow:0 3px 8px rgba(11,110,79,.24)}
+.step b{color:var(--green-800)}
+.step .k{display:inline-block;font-size:10.5px;font-weight:700;background:#fff;border:1px solid #cfe6db;color:var(--green-800);border-radius:5px;padding:0 5px;margin:0 1px}
+
+/* NOTES */
+.note{display:flex;gap:10px;padding:12px 14px;border-radius:12px;margin-top:14px;font-size:12px;line-height:1.55}
+.note .ic{width:15px;height:15px;flex:none;margin-top:2px}
+.note b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.note.tip{background:var(--green-50);border:1px solid #dcefe6;color:#2c433a}
+.note.tip .ic{color:var(--green)}
+.note.warn{background:var(--amber-50);border:1px solid #f7e3bd;color:#6b4a12}
+.note.warn .ic{color:#b97713}
+.note.danger{background:var(--red-50);border:1px solid #f6d3d3;color:#7c2626}
+.note.danger .ic{color:var(--red)}
+
+/* SPEC */
+.spec{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:12px;margin-top:14px}
+.spec thead th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#7b8a84;text-align:left;padding:10px 12px;background:#f4f8f6;border-bottom:1px solid var(--line);font-weight:800}
+.spec td{padding:9px 12px;border-bottom:1px solid #f0f5f2;vertical-align:top;color:#3d4b45}
+.spec tr:last-child td{border-bottom:0}
+.spec td:first-child{font-weight:700;color:#122a22;white-space:nowrap}
+.spec code{background:#eef5f1;border:1px solid #dcebe3;border-radius:5px;padding:1px 5px;font-size:10.5px;color:#0b6e4f;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* PHONE */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:296px;background:linear-gradient(160deg,#1b2a24,#0c1713);border-radius:42px;padding:9px;box-shadow:var(--shadow-lg);position:relative;flex:none;border:1px solid rgba(255,255,255,.08)}
+.phone::before{content:"";position:absolute;left:-2px;top:110px;width:2px;height:34px;background:#2a3a33;border-radius:2px}
+.phone::after{content:"";position:absolute;right:-2px;top:130px;width:2px;height:52px;background:#2a3a33;border-radius:2px}
+.screen{background:#f4f7f5;border-radius:34px;overflow:hidden;height:636px;display:flex;flex-direction:column;position:relative}
+.notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:96px;height:20px;background:#0c1713;border-radius:999px;z-index:20}
+.status{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 3px;font-size:8.5px;font-weight:700;color:#243b33;flex:none}
+.status .sig{display:flex;gap:3px;align-items:center}
+.status .bat{width:14px;height:7px;border:1px solid #243b33;border-radius:2px;position:relative}
+.status .bat::after{content:"";position:absolute;inset:1px;right:3px;background:#243b33;border-radius:1px}
+.appbar{background:var(--green);color:#fff;flex:none;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700}
+.appbar .l,.appbar .r{width:22px;height:22px;display:grid;place-items:center;border-radius:50%}
+.appbar .ic{width:13px;height:13px}
+.appbar .title{font-size:11.5px}
+.app-body{flex:1;min-height:0;overflow:auto;padding:9px 10px 12px;display:flex;flex-direction:column;gap:8px;scrollbar-width:none}
+.app-body::-webkit-scrollbar{display:none}
+.p-card{background:#fff;border:1px solid #e2e9e5;border-radius:13px;padding:10px 11px;box-shadow:0 1px 2px rgba(9,40,30,.04)}
+.p-row{display:flex;align-items:center;gap:8px}
+.p-ico{width:28px;height:28px;border-radius:9px;background:var(--green-100);display:grid;place-items:center;color:var(--green);flex:none}
+.p-ico .ic{width:14px;height:14px}
+.p-title{font-size:10px;font-weight:800;color:#122a22;line-height:1.25}
+.p-sub{font-size:7.5px;color:#7b8a84;margin-top:1px}
+.p-clock{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#074a36;text-align:center;margin-top:5px;font-variant-numeric:tabular-nums}
+.p-date{font-size:7.5px;color:#93a29c;text-align:center;margin-top:-2px}
+.p-label{font-size:7.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#93a29c;margin-bottom:5px}
+.p-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--green);color:#fff;border-radius:10px;padding:10px;font-size:10px;font-weight:800;width:100%;box-shadow:0 6px 14px rgba(11,110,79,.22)}
+.p-btn .ic{width:13px;height:13px}
+.p-btn.amber{background:var(--amber);box-shadow:0 6px 14px rgba(233,162,59,.24)}
+.p-btn.red{background:var(--red);box-shadow:0 6px 14px rgba(214,69,69,.22)}
+.p-btn.out{background:#fff;color:var(--green);border:1px solid #cfe0d8;box-shadow:none}
+.p-input{background:#fff;border:1px solid #dde7e2;border-radius:9px;padding:7px 9px;font-size:8.5px;color:#243b33;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.p-input.ph{color:#9aa8a2}
+.p-input .ic{width:11px;height:11px;color:#93a29c;flex:none}
+.p-field-label{font-size:7.5px;font-weight:700;color:#5b6b65;margin-bottom:3px}
+.p-form{display:flex;flex-direction:column;gap:7px}
+.p-two{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.p-tabs{display:flex;background:#fff;border-radius:9px;padding:3px;gap:2px;border:1px solid #e2e9e5}
+.p-tab{flex:1;text-align:center;font-size:7.5px;font-weight:800;color:#8b9a94;padding:5px 2px;border-radius:6px}
+.p-tab.on{background:var(--green);color:#fff}
+.p-list{display:flex;flex-direction:column;gap:6px}
+.p-item{background:#fff;border:1px solid #e2e9e5;border-radius:10px;padding:7px 9px;display:flex;align-items:center;gap:7px}
+.p-item .grow{flex:1;min-width:0}
+.p-item .t{font-size:8.5px;font-weight:800;color:#122a22;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-item .s{font-size:7px;color:#7b8a84;margin-top:1px}
+.p-item .v{font-size:8.5px;font-weight:800;color:#0f7a45;white-space:nowrap}
+.p-badge{font-size:6.8px;font-weight:800;padding:2px 6px;border-radius:999px;white-space:nowrap}
+.p-badge.green{background:#e7f7ee;color:#0f7a45}
+.p-badge.amber{background:#fff4df;color:#a16207}
+.p-badge.red{background:#fdeaea;color:#b91c1c}
+.p-badge.gray{background:#eef3f0;color:#5b6b65}
+.p-nav{flex:none;background:#fff;border-top:1px solid #e6ede9;display:flex;justify-content:space-around;padding:6px 4px 10px}
+.p-nav .item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:6.5px;font-weight:700;color:#93a29c;width:20%}
+.p-nav .item .ic{width:15px;height:15px}
+.p-nav .item.on{color:var(--green)}
+.snack{margin:0 10px 8px;background:#3a2a10;color:#ffd88f;border-radius:10px;padding:7px 10px;font-size:7.8px;font-weight:600;display:flex;gap:6px;align-items:flex-start;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.snack .ic{width:11px;height:11px;flex:none;margin-top:1px;color:#f5b64a}
+.selfie{height:74px;border-radius:10px;border:1.5px dashed #b9d2c7;background:#f7fbf9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#7b8a84;font-size:7.5px;font-weight:700}
+.selfie .ic{width:18px;height:18px;color:var(--green-500)}
+.p-loc{display:flex;align-items:center;gap:5px;background:#f1faf6;border:1px solid #dcefe6;border-radius:8px;padding:5px 7px;font-size:7.2px;color:#2c433a;font-weight:600}
+.p-loc .ic{width:10px;height:10px;color:var(--green);flex:none}
+.p-dot{width:5px;height:5px;border-radius:50%;background:#22c55e;flex:none;box-shadow:0 0 0 2px rgba(34,197,94,.18)}
+.mini-label{font-size:6.8px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#93a29c}
+.p-divider{height:1px;background:#eef3f0;margin:6px 0}
+.money-row{display:flex;justify-content:space-between;font-size:8px;padding:2.5px 0;color:#3d4b45}
+.money-row b{font-weight:700;color:#122a22;font-variant-numeric:tabular-nums}
+.money-row.neg b{color:#b91c1c}
+.total-box{display:flex;justify-content:space-between;align-items:center;background:#e6f4ee;border-radius:9px;padding:7px 9px;margin-top:5px}
+.total-box span{font-size:8px;font-weight:800;color:#074a36;letter-spacing:.04em}
+.total-box b{font-size:11px;font-weight:800;color:#074a36}
+
+/* FLOW */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.flow-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
+.flow-card .stepno{position:absolute;right:16px;top:14px;font-size:26px;font-weight:800;color:#edf4f0;letter-spacing:-.04em}
+.flow-card .fic{width:34px;height:34px;border-radius:10px;background:var(--green-50);color:var(--green);display:grid;place-items:center;margin-bottom:12px;border:1px solid var(--green-100)}
+.flow-card .fic .ic{width:17px;height:17px}
+.flow-card h4{font-size:13.5px;margin-bottom:4px;letter-spacing:-.01em}
+.flow-card p{font-size:11.5px;color:var(--muted);line-height:1.55}
+.flow-card .who{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--green-50);border-radius:5px;padding:2px 7px;margin-top:10px}
+.flow-card.mob .fic{background:var(--blue-50);color:var(--blue);border-color:#dbe7ff}
+.flow-card.mob .who{color:var(--blue);background:var(--blue-50)}
+
+/* FAQ */
+.faq{display:grid;gap:10px;margin-top:22px}
+details{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px 18px;box-shadow:var(--shadow-sm)}
+details[open]{border-color:#cfe6db}
+summary{cursor:pointer;font-weight:700;font-size:13.5px;list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";width:20px;height:20px;border-radius:6px;background:var(--green-50);color:var(--green);display:grid;place-items:center;font-size:14px;font-weight:700;flex:none}
+details[open] summary::before{content:"-";background:var(--green);color:#fff}
+details p{font-size:12.5px;color:var(--muted);margin:10px 0 2px 30px;line-height:1.6}
+
+/* FOOTER */
+footer{background:linear-gradient(160deg,#063d2c,#074a36);color:#a9d6c4;margin-top:30px;padding:44px 24px}
+.foot-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-brand{display:flex;align-items:center;gap:12px;color:#fff}
+.foot-brand .brand-mark{background:rgba(255,255,255,.14);box-shadow:none}
+.foot-brand b{font-size:15px;display:block}
+.foot-brand small{font-size:11px;color:#a9d6c4}
+footer .meta{font-size:11.5px;line-height:1.8;text-align:right}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:960px){.feature-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){
+  .topnav{display:none}
+  .hero-inner{padding:52px 20px 60px}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  main{padding:0 16px 70px}
+  .feature{padding:20px;border-radius:18px}
+  .side{display:none}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-grid.three{grid-template-columns:1fr 1fr 1fr}
+  .spec{display:block;overflow-x:auto}
+  footer .meta{text-align:left}
+  .chapter{margin-top:54px}
+}
+@media(max-width:600px){.flow{grid-template-columns:1fr}}
+@media(max-width:420px){.stat-grid.three{grid-template-columns:1fr 1fr}.hero-stats{grid-template-columns:1fr}}
+@media print{
+  .topbar,.hero-actions,.subnav{display:none}
+  .hero{background:#074a36 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .feature,.browser,.phone,.flow-card{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.5 8.5 0 1 1 21 11.5z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-check-square" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+<symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="16" x2="13" y2="16"/></symbol>
+<symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/><polyline points="12 7 12 12 15 14"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">Z</span>
+      <span><span>Zea HR</span><small>Panduan Operasional</small></span>
+    </a>
+    <nav class="topnav">
+      <a href="#alur" data-spy="alur">Alur Kerja</a>
+      <a href="#admin" data-spy="admin">Web Admin</a>
+      <a href="#mobile" data-spy="mobile">Aplikasi Mobile</a>
+      <a href="#faq" data-spy="faq">FAQ</a>
+    </nav>
+    <a class="topbar-cta" href="#admin">Mulai Panduan</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> Panduan Lengkap · Versi 1.0</div>
+    <h1>Satu sistem HR,<br>dua aplikasi yang <em>saling terhubung.</em></h1>
+    <p class="lead">
+      Panduan operasional Zea HR untuk admin dan karyawan. Lengkap dengan tampilan tiap
+      halaman, penjelasan fungsi, dan langkah pengisian field demi field — dari mengatur
+      lokasi absensi sampai slip gaji terbit.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#admin">Bagian 1 — Manajemen Web <svg class="ic"><use href="#i-arrow-right"/></svg></a>
+      <a class="btn btn-ghost" href="#mobile">Bagian 2 — Aplikasi Mobile <svg class="ic"><use href="#i-arrow-right"/></svg></a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>6</strong><span>Modul HR di web admin</span></div>
+      <div><strong>5</strong><span>Menu utama di mobile</span></div>
+      <div><strong>4</strong><span>Jenis pengajuan karyawan</span></div>
+      <div><strong>1</strong><span>Alur payroll terintegrasi</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+<section id="alur">
+  <div class="chapter">
+    <div class="num" style="background:var(--green-100);color:var(--green-800)">0</div>
+    <div>
+      <div class="chapter-kicker">Gambaran Besar</div>
+      <h2>Alur kerja dari awal sampai gajian</h2>
+      <p>Pahami dulu urutan ini agar setiap fitur terasa masuk akal.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-card reveal">
+      <span class="stepno">01</span>
+      <div class="fic"><svg class="ic"><use href="#i-map"/></svg></div>
+      <h4>Atur lokasi &amp; jam kerja</h4>
+      <p>Tentukan titik toko, radius geofence, jam masuk/pulang, toleransi telat, denda, hari kerja, hari libur, dan shift.</p>
+      <span class="who">Web Admin</span>
+    </div>
+    <div class="flow-card reveal">
+      <span class="stepno">02</span>
+      <div class="fic"><svg class="ic"><use href="#i-users"/></svg></div>
+      <h4>Daftarkan karyawan</h4>
+        <p>Hubungkan akun user ke profil pegawai: jabatan, toko, shift, tipe penggajian (bulanan/mingguan/harian), gaji pokok, tunjangan, rekening, dan kuota cuti.</p>
+      <span class="who">Web Admin</span>
+    </div>
+    <div class="flow-card mob reveal">
+      <span class="stepno">03</span>
+      <div class="fic"><svg class="ic"><use href="#i-scan"/></svg></div>
+      <h4>Karyawan absen</h4>
+      <p>Absen masuk dan pulang dari HP dengan validasi GPS dalam radius toko plus foto selfie sebagai bukti.</p>
+      <span class="who">Mobile</span>
+    </div>
+    <div class="flow-card mob reveal">
+      <span class="stepno">04</span>
+      <div class="fic"><svg class="ic"><use href="#i-clipboard"/></svg></div>
+      <h4>Karyawan mengajukan</h4>
+      <p>Ajukan cuti/izin, lembur, koreksi absen (telat atau lupa pulang), atau kasbon langsung dari aplikasi.</p>
+      <span class="who">Mobile</span>
+    </div>
+    <div class="flow-card reveal">
+      <span class="stepno">05</span>
+      <div class="fic"><svg class="ic"><use href="#i-check-square"/></svg></div>
+      <h4>Admin memproses</h4>
+      <p>Setujui atau tolak pengajuan, koreksi absensi manual bila perlu, dan pantau rekap kehadiran.</p>
+      <span class="who">Web Admin</span>
+    </div>
+    <div class="flow-card reveal">
+      <span class="stepno">06</span>
+      <div class="fic"><svg class="ic"><use href="#i-receipt"/></svg></div>
+      <h4>Payroll &amp; slip gaji</h4>
+      <p>Generate payroll per periode, rapikan bonus/potongan, finalisasi, lalu slip otomatis muncul di HP karyawan.</p>
+      <span class="who">Web Admin → Mobile</span>
+    </div>
+  </div>
+
+  <div class="note tip reveal">
+    <svg class="ic"><use href="#i-info"/></svg>
+    <div><b>Urutan penting</b>Jangan membuat payroll sebelum semua pengajuan periode tersebut diproses dan absensi sudah dikoreksi. Sistem akan memblokir dan menampilkan sisa pengajuan yang belum selesai.</div>
+  </div>
+</section>
+
+<section id="admin">
+  <div class="chapter web">
+    <div class="num">1</div>
+    <div>
+      <div class="chapter-kicker">Bagian Pertama</div>
+      <h2>Manajemen HR di Web Admin</h2>
+      <p>Dashboard React untuk mengatur seluruh data HR perusahaan.</p>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <a href="#admin-dashboard">Dashboard HR</a>
+    <a href="#admin-lokasi">Lokasi &amp; Jam Kerja</a>
+    <a href="#admin-karyawan">Master Karyawan &amp; Gaji</a>
+    <a href="#admin-absensi">Monitoring Absensi</a>
+    <a href="#admin-approval">Pusat Approval</a>
+    <a href="#admin-payroll">Payroll</a>
+  </div>
+  <article class="feature reveal" id="admin-dashboard">
+    <div class="feature-head">
+      <div class="feature-num">1.1</div>
+      <div>
+        <h3>Dashboard HR</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-grid"/></svg> Sidebar → HR Management → Dashboard HR</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Halaman pertama yang dibuka admin. Menampilkan ringkasan hari ini: jumlah pegawai aktif,
+      yang sudah hadir, terlambat, cuti/izin, dan alpha, ditambah jumlah pengajuan yang menunggu
+      persetujuan serta status payroll. Setiap kartu bisa diklik untuk langsung menuju halaman detailnya.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard</div>
+              <div class="side-item"><svg class="ic"><use href="#i-box"/></svg> Stok Barang</div>
+              <div class="side-item"><svg class="ic"><use href="#i-cart"/></svg> Barang Keluar</div>
+              <div class="side-item"><svg class="ic"><use href="#i-wallet"/></svg> Biaya Operasional</div>
+              <div class="side-item"><svg class="ic"><use href="#i-store"/></svg> Profile Toko</div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item active"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+              <div class="side-item"><svg class="ic"><use href="#i-scan"/></svg> Absensi Saya</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Dashboard HR</h4>
+                  <p>Ringkasan absensi, pengajuan, dan payroll hari ini.</p>
+                </div>
+                <span class="mock-btn alt"><svg class="ic" style="width:8px;height:8px"><use href="#i-refresh"/></svg> Muat Ulang</span>
+              </div>
+
+              <div class="mock-section">Absensi hari ini · 14 Nov 2026</div>
+              <div class="stat-grid">
+                <div class="stat blue"><span>Pegawai Aktif</span><b>42</b><small>Total 45</small></div>
+                <div class="stat green"><span>Hadir</span><b>38</b></div>
+                <div class="stat amber"><span>Terlambat</span><b>3</b></div>
+                <div class="stat purple"><span>Cuti / Izin</span><b>2</b></div>
+                <div class="stat red"><span>Alpha</span><b>2</b></div>
+              </div>
+
+              <div class="mock-section">Pengajuan menunggu approval</div>
+              <div class="stat-grid">
+                <div class="stat red"><span>Total Pending</span><b>7</b></div>
+                <div class="stat blue"><span>Cuti</span><b>3</b></div>
+                <div class="stat blue"><span>Lembur</span><b>1</b></div>
+                <div class="stat blue"><span>Koreksi</span><b>2</b></div>
+                <div class="stat blue"><span>Kasbon</span><b>1</b></div>
+              </div>
+
+              <div class="mock-section">Payroll</div>
+              <div class="stat-grid three">
+                <div class="stat amber"><span>Draft</span><b>1</b></div>
+                <div class="stat green"><span>Final</span><b>2</b></div>
+                <div class="stat gray"><span>Lokasi &amp; Shift</span><b style="font-size:10px">Atur</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara menggunakan</div>
+        <div class="steps">
+          <div class="step">Buka menu <span class="k">HR Management</span> lalu pilih <b>Dashboard HR</b>.</div>
+          <div class="step">Baca kartu <b>Absensi Hari Ini</b>. Angka <b>Terlambat</b> dan <b>Alpha</b> adalah yang paling perlu ditindaklanjuti.</div>
+          <div class="step">Lihat <b>Total Pending</b>. Jika ada angka, klik kartunya untuk masuk ke Pusat Approval.</div>
+          <div class="step">Pantau <b>Payroll Draft</b>. Draft berarti payroll sudah dibuat tetapi belum difinalisasi.</div>
+          <div class="step">Klik <b>Muat Ulang</b> bila data berubah setelah karyawan absen atau mengajukan.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Tips</b>Kartu berwarna merah (Alpha / Pending) adalah indikator yang butuh perhatian. Klik kartu untuk drill-down tanpa harus mencari menu.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature reveal" id="admin-lokasi">
+    <div class="feature-head">
+      <div class="feature-num">1.2</div>
+      <div>
+        <h3>Lokasi &amp; Jam Kerja Toko</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-map"/></svg> Sidebar → HR Management → Lokasi &amp; Jam Kerja Toko</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Jantung dari validasi absensi. Di sinilah admin menentukan titik koordinat toko dan radius
+      yang boleh dipakai karyawan untuk absen, jam kerja, toleransi keterlambatan, besaran denda,
+      hari kerja aktif, daftar hari libur, dan shift kerja per cabang.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management/store-locations</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard</div>
+              <div class="side-item"><svg class="ic"><use href="#i-box"/></svg> Stok Barang</div>
+              <div class="side-item"><svg class="ic"><use href="#i-store"/></svg> Profile Toko</div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub active"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Lokasi &amp; Jam Kerja Toko</h4>
+                  <p>Atur titik lokasi (geofence), radius, jam kerja, denda, dan hari libur per cabang.</p>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:78px 1fr;gap:7px">
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div class="card-mock" style="padding:6px;border-color:#bfe0d2;background:#f1faf6">
+                    <div style="font-size:7.5px;font-weight:800;color:#074a36">Zea Textile Pusat</div>
+                    <div style="font-size:6.5px;color:#7b8a84;margin-top:1px">Lokasi diatur · 100 m</div>
+                  </div>
+                  <div class="card-mock" style="padding:6px">
+                    <div style="font-size:7.5px;font-weight:800">Cabang Sukamaju</div>
+                    <div style="font-size:6.5px;color:#7b8a84;margin-top:1px">Radius 80 m</div>
+                  </div>
+                  <div class="card-mock" style="padding:6px">
+                    <div style="font-size:7.5px;font-weight:800">Cabang Cibiru</div>
+                    <div style="font-size:6.5px;color:#7b8a84;margin-top:1px">Belum diatur</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div class="map-mock">
+                    <div class="geofence"></div>
+                    <div class="map-pin"></div>
+                    <div class="map-chip">Geser pin ke titik toko</div>
+                    <div class="map-zoom"><i>+</i><i>-</i></div>
+                  </div>
+                  <div class="mock-form three">
+                    <div class="field"><label>Jam Masuk</label><div class="input">08:00</div></div>
+                    <div class="field"><label>Jam Pulang</label><div class="input">17:00</div></div>
+                    <div class="field"><label>Toleransi Telat</label><div class="input">15 menit</div></div>
+                    <div class="field"><label>Denda Telat / Kejadian</label><div class="input money"><span class="rp">Rp</span><span>25.000</span></div></div>
+                    <div class="field"><label>Denda Lupa Absen Pulang</label><div class="input money"><span class="rp">Rp</span><span>50.000</span></div></div>
+                    <div class="field"><label>Hari Kerja</label><div class="chips" style="margin-top:0">
+                      <span class="chip on">Sen</span><span class="chip on">Sel</span><span class="chip on">Rab</span><span class="chip on">Kam</span><span class="chip on">Jum</span><span class="chip on">Sab</span><span class="chip">Min</span>
+                    </div></div>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end"><span class="mock-btn">Simpan Konfigurasi</span></div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+                <div class="card-mock">
+                  <h5><svg class="ic"><use href="#i-calendar"/></svg> Hari Libur</h5>
+                  <div style="display:flex;gap:3px;margin-bottom:5px">
+                    <div class="mock-input" style="flex:1"><svg class="ic"><use href="#i-calendar"/></svg> 25/12/2026</div>
+                    <div class="mock-input" style="flex:1">Natal</div>
+                    <span class="mock-btn" style="padding:4px 6px">Tambah</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:7.5px;background:#f5f9f7;padding:4px 6px;border-radius:5px;margin-bottom:3px">
+                    <span>Natal</span><span style="color:#8b9a94">25 Des 2026</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:7.5px;background:#f5f9f7;padding:4px 6px;border-radius:5px">
+                    <span>Tahun Baru</span><span style="color:#8b9a94">1 Jan 2027</span>
+                  </div>
+                </div>
+                <div class="card-mock">
+                  <h5><svg class="ic"><use href="#i-clock"/></svg> Shift Kerja</h5>
+                  <div style="display:flex;gap:3px;margin-bottom:5px">
+                    <div class="mock-input" style="flex:1.2">Shift Pagi</div>
+                    <div class="mock-input">08:00</div>
+                    <div class="mock-input">16:00</div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;background:#f5f9f7;padding:4px 6px;border-radius:5px;margin-bottom:3px">
+                    <span><b>Shift Pagi</b> · 08:00-16:00</span><span style="color:#0b6e4f;font-weight:700">Edit</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:7.5px;background:#f5f9f7;padding:4px 6px;border-radius:5px">
+                    <span><b>Shift Sore</b> · 16:00-23:00</span><span style="color:#0b6e4f;font-weight:700">Edit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Cara pengisian</div>
+        <div class="steps">
+          <div class="step">Pilih toko di panel kiri. Semua pengaturan di kanan berlaku khusus untuk toko tersebut.</div>
+          <div class="step">Geser <b>pin peta</b> tepat di lokasi toko, lalu atur <b>radius</b>. Radius 100 m adalah nilai umum; perkecil bila lokasi padat.</div>
+          <div class="step">Isi <b>Jam Masuk</b> dan <b>Jam Pulang</b>. Jam pulang wajib lebih besar dari jam masuk.</div>
+          <div class="step">Isi <b>Toleransi Telat</b> dalam menit (contoh 15). Lewat dari ini status absensi menjadi Terlambat.</div>
+          <div class="step">Isi <b>Denda Telat</b> dan <b>Denda Lupa Absen Pulang</b> dalam rupiah. Isi <code>0</code> jika tidak ada denda.</div>
+          <div class="step">Pilih <b>Hari Kerja</b> dengan mengetuk chip hari. Minimal satu hari harus aktif.</div>
+          <div class="step">Klik <b>Simpan Konfigurasi</b>, lalu tambahkan <b>Hari Libur</b> dan <b>Shift</b> bila diperlukan.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Perhatian</b>Jika lokasi toko belum diatur, aplikasi mobile menampilkan pesan "Lokasi toko belum diatur oleh admin" dan karyawan tidak bisa absen.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="spec">
+      <thead><tr><th>Field</th><th>Contoh</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Titik lokasi</td><td>Peta</td><td>Koordinat pusat geofence absensi. Geser pin untuk mengubah.</td></tr>
+        <tr><td>Radius</td><td>100 m</td><td>Jarak maksimal HP ke titik toko saat absen. Di luar radius, tombol absen ditolak.</td></tr>
+        <tr><td>Jam masuk / pulang</td><td>08:00 / 17:00</td><td>Jam kerja baku toko yang dipakai bila karyawan tidak punya shift.</td></tr>
+        <tr><td>Toleransi telat</td><td>15 menit</td><td>Batas bebas denda keterlambatan.</td></tr>
+        <tr><td>Denda telat</td><td>Rp 25.000</td><td>Dipotong per kejadian telat pada slip gaji.</td></tr>
+        <tr><td>Denda lupa pulang</td><td>Rp 50.000</td><td>Dipotong bila karyawan tidak melakukan absen pulang.</td></tr>
+        <tr><td>Hari kerja</td><td>Senin-Sabtu</td><td>Dasar perhitungan alpha dan rekap absensi.</td></tr>
+        <tr><td>Hari libur</td><td>25 Des - Natal</td><td>Tanggal yang dikecualikan dari kewajiban absen.</td></tr>
+        <tr><td>Shift</td><td>Pagi 08:00-16:00</td><td>Menggantikan jam kerja toko untuk pegawai yang ditugaskan ke shift tersebut.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note tip">
+      <svg class="ic"><use href="#i-info"/></svg>
+      <div><b>Tips radius</b>Untuk toko di dalam mall atau gedung, gunakan radius 50-80 m agar absensi tetap akurat dan tidak bisa dilakukan dari luar area.</div>
+    </div>
+  </article>
+  <article class="feature reveal" id="admin-karyawan">
+    <div class="feature-head">
+      <div class="feature-num">1.3</div>
+      <div>
+        <h3>Master Karyawan &amp; Gaji</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-users"/></svg> Sidebar → HR Management → Master Karyawan &amp; Gaji</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Tempat menghubungkan akun login karyawan dengan profil HR-nya. Admin bisa mencari pegawai,
+      memfilter per toko/status, mengubah tipe penggajian, gaji dan tunjangan, menetapkan shift, serta
+      melihat riwayat gaji dan jabatan. Tanpa data di sini, karyawan akan berstatus "bukan pegawai" saat login.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman &amp; form</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management/employees</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub active"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Master Karyawan &amp; Gaji</h4>
+                  <p>Kelola profil pegawai: tipe penggajian, gaji, tunjangan, rekening, dan kuota cuti.</p>
+                </div>
+                <span class="mock-btn"><svg class="ic" style="width:8px;height:8px"><use href="#i-plus"/></svg> Tambah Karyawan</span>
+              </div>
+
+              <div class="mock-toolbar">
+                <div class="mock-input fill"><svg class="ic"><use href="#i-search"/></svg> Cari nama / username...</div>
+                <div class="mock-input">Semua Toko <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                <div class="mock-input">Semua Status <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+              </div>
+
+              <table class="mock-table">
+                <thead><tr><th>Pegawai</th><th>Jabatan</th><th>Toko</th><th class="num">Gaji Pokok</th><th class="center">Status</th><th class="center">Aksi</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="name">Andi Pratama</span><span class="sub">andi.pratama</span></td>
+                    <td>Kasir</td><td>Pusat</td><td class="num">Rp 4.500.000<span class="sub">per bulan</span></td>
+                    <td class="center"><span class="pill green"><span class="d"></span>Aktif</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                  <tr>
+                    <td><span class="name">Siti Rahma</span><span class="sub">siti.rahma</span></td>
+                    <td>Admin Toko</td><td>Sukamaju</td><td class="num">Rp 5.200.000<span class="sub">per bulan</span></td>
+                    <td class="center"><span class="pill green"><span class="d"></span>Aktif</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                  <tr>
+                    <td><span class="name">Budi Santoso</span><span class="sub">budi.s</span></td>
+                    <td>Gudang</td><td>Pusat</td><td class="num">Rp 4.000.000<span class="sub">per bulan</span></td>
+                    <td class="center"><span class="pill gray"><span class="d"></span>Nonaktif</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                  <tr>
+                    <td><span class="name">Dewi Lestari</span><span class="sub">dewi.l</span></td>
+                    <td>Kasir</td><td>Cibiru</td><td class="num">Rp 4.300.000<span class="sub">per bulan</span></td>
+                    <td class="center"><span class="pill green"><span class="d"></span>Aktif</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="card-mock" style="margin-top:8px">
+                <h5><svg class="ic"><use href="#i-user"/></svg> Edit Profil Pegawai — Andi Pratama</h5>
+                <div class="mock-form three">
+                  <div class="field"><label>Kode Pegawai</label><div class="input">ZEA-001</div></div>
+                  <div class="field"><label>NIK</label><div class="input">3273xxxxxxxx0001</div></div>
+                  <div class="field"><label>Jabatan</label><div class="input">Kasir</div></div>
+                  <div class="field"><label>Toko</label><div class="input">Zea Textile Pusat</div></div>
+                  <div class="field"><label>Shift Kerja</label><div class="input">Shift Pagi</div></div>
+                  <div class="field"><label>Tipe Penggajian</label><div class="input">Bulanan <svg class="ic"><use href="#i-chevron-down"/></svg></div></div>
+                  <div class="field"><label>Gaji Pokok / Bulan</label><div class="input money"><span class="rp">Rp</span><span>4.500.000</span></div></div>
+                  <div class="field"><label>Uang Makan / Hari</label><div class="input money"><span class="rp">Rp</span><span>25.000</span></div></div>
+                  <div class="field"><label>Uang Transport / Hari</label><div class="input money"><span class="rp">Rp</span><span>20.000</span></div></div>
+                  <div class="field"><label>Tarif Lembur / Jam</label><div class="input money"><span class="rp">Rp</span><span>30.000</span></div></div>
+                  <div class="field"><label>Jatah Cuti / Tahun</label><div class="input">12 hari</div></div>
+                  <div class="field"><label>Sisa Cuti Saat Ini</label><div class="input">9 hari</div></div>
+                  <div class="field"><label>Tanggal Bergabung</label><div class="input">01/02/2024</div></div>
+                  <div class="field"><label>Nama Bank</label><div class="input">BCA</div></div>
+                  <div class="field"><label>No. Rekening</label><div class="input">1234567890</div></div>
+                  <div class="field"><label>Status</label><div class="toggles"><span class="toggle"><span class="sw"></span>Aktif</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Cara pengisian</div>
+        <div class="steps">
+          <div class="step">Klik <b>Tambah Karyawan</b>, cari nama/username akun, lalu pilih akun tersebut.</div>
+          <div class="step">Isi <b>Kode Pegawai</b>, <b>NIK</b>, dan <b>Jabatan</b> sesuai data kepegawaian.</div>
+          <div class="step">Pilih <b>Toko</b> dan, bila ada, <b>Shift Kerja</b>. Kosongkan shift untuk memakai jam kerja toko.</div>
+          <div class="step">Pilih <b>Tipe Penggajian</b>: <b>Bulanan</b>, <b>Mingguan</b>, atau <b>Harian</b>. Label gaji pokok otomatis menyesuaikan (per bulan/minggu/hari).</div>
+          <div class="step">Isi komponen gaji: <b>Gaji Pokok</b> sesuai tipe, <b>Uang Makan/Hari</b>, <b>Uang Transport/Hari</b>, dan <b>Tarif Lembur/Jam</b>.</div>
+          <div class="step">Isi <b>Jatah Cuti</b>, <b>Sisa Cuti</b>, tanggal <b>Bergabung</b>/<b>Berhenti</b>, serta <b>Bank</b> dan <b>No. Rekening</b>.</div>
+          <div class="step">Aktifkan toggle <b>Aktif</b>. Nonaktif membuat karyawan berstatus diblokir saat login.</div>
+          <div class="step">Gunakan <b>Detail</b> untuk menyimpan perubahan dan <b>Riwayat</b> untuk melihat histori gaji/jabatan.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Tipe menentukan perhitungan</b>Tipe penggajian menentukan cara gaji pokok dibayar. Gaji pokok dan tarif lembur tetap memengaruhi payroll. Pastikan rekening benar karena dipakai pada slip dan ekspor transfer bank.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Hapus pegawai</b>Penghapusan bersifat menonaktifkan data (soft delete) agar riwayat absensi dan slip lama tetap utuh.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-label" style="margin-top:26px">Tiga tipe penggajian</div>
+    <table class="spec">
+      <thead><tr><th>Tipe</th><th>Cara gaji pokok dihitung</th></tr></thead>
+      <tbody>
+        <tr><td>Bulanan</td><td>Nominal penuh dibayar setiap periode. Alpha dan cuti tanpa gaji dipotong dari gaji pokok.</td></tr>
+        <tr><td>Mingguan</td><td>Nominal per minggu dibagi jumlah hari kerja per minggu, lalu dikali hari terbayar pada periode payroll.</td></tr>
+        <tr><td>Harian</td><td>Nominal per hari dikali hari terbayar pada periode payroll.</td></tr>
+      </tbody>
+    </table>
+    <div class="note tip">
+      <svg class="ic"><use href="#i-info"/></svg>
+      <div><b>Hari terbayar</b>Hadir, telat, sakit, cuti tahunan, dan dinas luar dihitung sebagai hari terbayar. Cuti tanpa gaji dan alpha tidak dihitung. Uang makan dan transport tetap dihitung dari jumlah hari hadir.</div>
+    </div>
+  </article>
+  <article class="feature reveal" id="admin-absensi">
+    <div class="feature-head">
+      <div class="feature-num">1.4</div>
+      <div>
+        <h3>Monitoring Absensi</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-clipboard"/></svg> Sidebar → HR Management → Monitoring Absensi</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Melihat seluruh absensi karyawan per cabang lengkap dengan jam masuk/pulang, status,
+      jarak geofence, dan foto selfie. Tersedia juga tab rekap untuk menghitung hadir, telat, sakit,
+      cuti, alpha, menit keterlambatan, dan lupa absen pulang per pegawai. Admin dapat melakukan
+      koreksi absensi manual dari halaman ini.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management/attendances</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub active"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Monitoring Absensi</h4>
+                  <p>Pantau absensi pegawai per cabang beserta foto selfie dan jarak geofence.</p>
+                </div>
+                <span class="mock-btn alt"><svg class="ic" style="width:8px;height:8px"><use href="#i-download"/></svg> Ekspor</span>
+              </div>
+
+              <div class="tabs" data-tabs="absen">
+                <button class="tab-btn active" data-target="absen-list">Daftar Absensi</button>
+                <button class="tab-btn" data-target="absen-rekap">Rekap</button>
+              </div>
+
+              <div class="tab-panel active" id="absen-list">
+                <div class="mock-toolbar">
+                  <div class="mock-input">01/11/2026 - 14/11/2026 <svg class="ic"><use href="#i-calendar"/></svg></div>
+                  <div class="mock-input">Semua Toko <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                  <div class="mock-input">Semua Status <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                  <div class="mock-input"><svg class="ic"><use href="#i-search"/></svg> Cari pegawai...</div>
+                </div>
+                <table class="mock-table">
+                  <thead><tr><th>Tanggal</th><th>Pegawai</th><th>Masuk</th><th>Pulang</th><th class="center">Status</th><th class="center">Jarak</th><th class="center">Foto</th><th class="center">Aksi</th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td>14 Nov 2026</td>
+                      <td><span class="name">Andi Pratama</span><span class="sub">Zea Textile Pusat</span></td>
+                      <td>08:04</td><td>17:02</td>
+                      <td class="center"><span class="pill green"><span class="d"></span>Hadir</span></td>
+                      <td class="center">24 m</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Lihat</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Koreksi</td>
+                    </tr>
+                    <tr>
+                      <td>14 Nov 2026</td>
+                      <td><span class="name">Siti Rahma</span><span class="sub">Cabang Sukamaju</span></td>
+                      <td>08:22</td><td>17:10</td>
+                      <td class="center"><span class="pill amber"><span class="d"></span>Terlambat</span></td>
+                      <td class="center">12 m</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Lihat</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Koreksi</td>
+                    </tr>
+                    <tr>
+                      <td>14 Nov 2026</td>
+                      <td><span class="name">Dewi Lestari</span><span class="sub">Cabang Cibiru</span></td>
+                      <td>08:00</td><td>-</td>
+                      <td class="center"><span class="pill blue"><span class="d"></span>Sakit</span></td>
+                      <td class="center">-</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Lihat</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Koreksi</td>
+                    </tr>
+                    <tr>
+                      <td>14 Nov 2026</td>
+                      <td><span class="name">Budi Santoso</span><span class="sub">Zea Textile Pusat</span></td>
+                      <td>-</td><td>-</td>
+                      <td class="center"><span class="pill red"><span class="d"></span>Alpha</span></td>
+                      <td class="center">-</td>
+                      <td class="center" style="color:#8b9a94">-</td>
+                      <td class="center" style="color:#0b6e4f;font-weight:700">Koreksi</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="card-mock" style="margin-top:7px">
+                  <h5><svg class="ic"><use href="#i-clock"/></svg> Koreksi Absensi Manual</h5>
+                  <div class="mock-form three">
+                    <div class="field"><label>Jam Masuk</label><div class="input">08:00</div></div>
+                    <div class="field"><label>Jam Pulang</label><div class="input">17:00</div></div>
+                    <div class="field"><label>Status</label><div class="input">Hadir</div></div>
+                    <div class="field"><label>Menit Keterlambatan</label><div class="input">0</div></div>
+                    <div class="field wide"><label>Catatan</label><div class="input">Koreksi karena karyawan lupa absen pulang.</div></div>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn gray">Batal</span><span class="mock-btn">Simpan Koreksi</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-panel" id="absen-rekap">
+                <table class="mock-table">
+                  <thead><tr><th>Pegawai</th><th>Hadir</th><th>Telat</th><th>Sakit</th><th>Cuti</th><th>Alpha</th><th>Menit Telat</th><th>Lupa Pulang</th></tr></thead>
+                  <tbody>
+                    <tr><td class="name">Andi Pratama</td><td>11</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td class="name">Siti Rahma</td><td>9</td><td>2</td><td>0</td><td>1</td><td>0</td><td>14</td><td>1</td></tr>
+                    <tr><td class="name">Dewi Lestari</td><td>10</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td class="name">Budi Santoso</td><td>7</td><td>1</td><td>0</td><td>0</td><td>3</td><td>9</td><td>2</td></tr>
+                  </tbody>
+                </table>
+                <div class="note warn" style="margin-top:7px;padding:7px 9px;font-size:7.5px;border-radius:7px">
+                  <svg class="ic" style="width:10px;height:10px"><use href="#i-alert"/></svg>
+                  <div><b style="font-size:7px">Rekap dipakai payroll</b>Angka telat, alpha, dan lupa pulang menjadi dasar potongan gaji.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Cara penggunaan</div>
+        <div class="steps">
+          <div class="step">Atur rentang tanggal, pilih <b>toko</b>, lalu filter <b>status</b> bila ingin fokus pada keterlambatan atau alpha.</div>
+          <div class="step">Klik <b>Lihat</b> pada kolom Foto untuk membuka bukti selfie absensi.</div>
+          <div class="step">Klik <b>Koreksi</b> jika ada kesalahan. Isi jam masuk/pulang, status, menit telat, dan catatan.</div>
+          <div class="step">Buka tab <b>Rekap</b> untuk melihat total kehadiran per pegawai dalam periode.</div>
+          <div class="step">Gunakan rekap sebagai bahan pemeriksaan sebelum generate payroll.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Status absensi</b>Hadir, Terlambat, Sakit, Cuti Tahunan, Cuti Tanpa Gaji, Dinas Luar, dan Alpha. Status inilah yang menentukan komponen gaji.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Koreksi manual</b>Lakukan koreksi hanya dengan bukti yang jelas. Setiap perubahan langsung memengaruhi rekap dan payroll.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="spec">
+      <thead><tr><th>Kolom / Field</th><th>Arti</th></tr></thead>
+      <tbody>
+        <tr><td>Tanggal</td><td>Tanggal absensi tercatat.</td></tr>
+        <tr><td>Masuk / Pulang</td><td>Jam absen masuk dan pulang (WIB).</td></tr>
+        <tr><td>Status</td><td>Hadir, Terlambat, Sakit, Cuti Tahunan, Cuti Tanpa Gaji, Dinas Luar, atau Alpha.</td></tr>
+        <tr><td>Jarak</td><td>Jarak HP karyawan ke titik toko saat absen (meter).</td></tr>
+        <tr><td>Foto</td><td>Bukti selfie absensi beserta watermark lokasi dan waktu.</td></tr>
+        <tr><td>Rekap</td><td>Akumulasi hadir, telat, sakit, cuti, alpha, menit telat, dan lupa pulang dalam periode.</td></tr>
+      </tbody>
+    </table>
+  </article>
+  <article class="feature reveal" id="admin-approval">
+    <div class="feature-head">
+      <div class="feature-num">1.5</div>
+      <div>
+        <h3>Pusat Approval</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-check-square"/></svg> Sidebar → HR Management → Pusat Approval</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Semua pengajuan karyawan dari aplikasi mobile berkumpul di sini: cuti/izin, lembur, koreksi
+      absen, dan kasbon. Admin dapat memfilter status, melihat alasan dan lampiran, lalu menyetujui
+      atau menolak disertai catatan admin yang akan terlihat oleh karyawan.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management/approvals</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub active"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Pusat Approval</h4>
+                  <p>Proses pengajuan cuti, lembur, koreksi absen, dan kasbon pegawai.</p>
+                </div>
+              </div>
+
+              <div class="stat-grid three" style="margin-bottom:8px">
+                <div class="stat red"><span>Menunggu</span><b>7</b></div>
+                <div class="stat green"><span>Disetujui</span><b>12</b></div>
+                <div class="stat gray"><span>Ditolak</span><b>2</b></div>
+              </div>
+
+              <div class="tabs" data-tabs="appr">
+                <button class="tab-btn active" data-target="appr-leave">Cuti &amp; Izin</button>
+                <button class="tab-btn" data-target="appr-overtime">Lembur</button>
+                <button class="tab-btn" data-target="appr-corr">Koreksi Absen</button>
+                <button class="tab-btn" data-target="appr-loan">Kasbon</button>
+              </div>
+
+              <div class="tab-panel active" id="appr-leave">
+                <div class="mock-toolbar">
+                  <div class="mock-input">Menunggu <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                  <div class="mock-input">Semua Toko <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                </div>
+                <div class="card-mock" style="margin-bottom:6px">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Andi Pratama · Cuti Tahunan</div>
+                      <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">18 Nov 2026 s/d 19 Nov 2026 · 2 hari</div>
+                      <div style="font-size:7.5px;color:#3d4b45;margin-top:3px">Alasan: keperluan keluarga di luar kota.</div>
+                    </div>
+                    <span class="pill amber"><span class="d"></span>Menunggu</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn red" style="padding:4px 8px">Tolak</span>
+                    <span class="mock-btn" style="padding:4px 8px">Setujui</span>
+                  </div>
+                </div>
+                <div class="card-mock">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Dewi Lestari · Sakit</div>
+                      <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">14 Nov 2026 s/d 15 Nov 2026 · 2 hari</div>
+                      <div style="font-size:7.5px;color:#3d4b45;margin-top:3px">Lampiran: surat-keterangan-sakit.jpg</div>
+                    </div>
+                    <span class="pill amber"><span class="d"></span>Menunggu</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn red" style="padding:4px 8px">Tolak</span>
+                    <span class="mock-btn" style="padding:4px 8px">Setujui</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-panel" id="appr-overtime">
+                <div class="card-mock">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Siti Rahma · Lembur 2 jam</div>
+                      <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">13 Nov 2026 · 17:00-19:00</div>
+                      <div style="font-size:7.5px;color:#3d4b45;margin-top:3px">Alasan: menyelesaikan stock opname.</div>
+                    </div>
+                    <span class="pill amber"><span class="d"></span>Menunggu</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn red" style="padding:4px 8px">Tolak</span>
+                    <span class="mock-btn" style="padding:4px 8px">Setujui</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-panel" id="appr-corr">
+                <div class="card-mock">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Andi Pratama · Lupa Absen Pulang</div>
+                      <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">12 Nov 2026 · diajukan pulang 17:05</div>
+                      <div style="font-size:7.5px;color:#3d4b45;margin-top:3px">Alasan: aplikasi tertutup saat akan absen pulang.</div>
+                    </div>
+                    <span class="pill amber"><span class="d"></span>Menunggu</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn red" style="padding:4px 8px">Tolak</span>
+                    <span class="mock-btn" style="padding:4px 8px">Setujui</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-panel" id="appr-loan">
+                <div class="card-mock">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Budi Santoso · Kasbon</div>
+                      <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">Rp 1.500.000 · cicilan Rp 500.000/bulan</div>
+                      <div style="font-size:7.5px;color:#3d4b45;margin-top:3px">Alasan: biaya perbaikan kendaraan.</div>
+                    </div>
+                    <span class="pill amber"><span class="d"></span>Menunggu</span>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                    <span class="mock-btn red" style="padding:4px 8px">Tolak</span>
+                    <span class="mock-btn" style="padding:4px 8px">Setujui</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Cara memproses</div>
+        <div class="steps">
+          <div class="step">Buka menu <b>Pusat Approval</b>. Angka di kartu atas menunjukkan jumlah per status.</div>
+          <div class="step">Pilih tab jenis pengajuan: <b>Cuti &amp; Izin</b>, <b>Lembur</b>, <b>Koreksi Absen</b>, atau <b>Kasbon</b>.</div>
+          <div class="step">Filter status <b>Menunggu</b> untuk melihat yang perlu diproses.</div>
+          <div class="step">Baca detail: tanggal, durasi, alasan, dan lampiran (terutama surat sakit).</div>
+          <div class="step">Klik <b>Setujui</b> atau <b>Tolak</b>. Isi catatan admin bila menolak agar karyawan tahu alasannya.</div>
+          <div class="step">Status langsung berubah dan terlihat di aplikasi mobile karyawan.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Sebelum payroll</b>Pastikan semua pengajuan pada periode payroll sudah berstatus disetujui atau ditolak. Sisa pengajuan akan memblokir generate payroll.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="spec">
+      <thead><tr><th>Jenis</th><th>Data yang diperiksa</th><th>Efek bila disetujui</th></tr></thead>
+      <tbody>
+        <tr><td>Cuti &amp; Izin</td><td>Jenis (cuti tahunan, sakit, izin, cuti tanpa gaji), tanggal mulai/selesai, alasan, lampiran.</td><td>Absensi periode tersebut tercatat sesuai jenis; cuti tahunan mengurangi sisa kuota.</td></tr>
+        <tr><td>Lembur</td><td>Tanggal, jam mulai/selesai, alasan.</td><td>Jam lembur dihitung dan dibayarkan sesuai tarif lembur karyawan.</td></tr>
+        <tr><td>Koreksi Absen</td><td>Jenis koreksi, tanggal absensi, jam yang diajukan, alasan, lampiran.</td><td>Jam masuk/pulang pada absensi terkait diperbaiki.</td></tr>
+        <tr><td>Kasbon</td><td>Jumlah kasbon, cicilan per bulan, tanggal, alasan.</td><td>Saldo kasbon aktif dan dipotong bertahap pada slip gaji.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note tip">
+      <svg class="ic"><use href="#i-info"/></svg>
+      <div><b>Catatan admin</b>Catatan yang Anda tulis saat menolak akan tampil di kartu riwayat pengajuan karyawan pada aplikasi mobile.</div>
+    </div>
+  </article>
+  <article class="feature reveal" id="admin-payroll">
+    <div class="feature-head">
+      <div class="feature-num">1.6</div>
+      <div>
+        <h3>Payroll</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-receipt"/></svg> Sidebar → HR Management → Payroll</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Modul penggajian per periode. Admin menentukan toko, nama periode, dan rentang cutoff;
+      sistem menghitung gaji dari tipe penggajian, data absensi, lembur, cuti, denda, dan kasbon.
+      Payroll berstatus draft bisa dirapikan (bonus/potongan lain), lalu difinalisasi agar slip gaji terbit ke aplikasi mobile.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan halaman</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="url">zeapos.id/hr-management/payrolls</div>
+          </div>
+          <div class="browser-body">
+            <aside class="side">
+              <div class="side-brand"><b>Z</b><span>Zea POS</span></div>
+              <div class="side-group">HR Management</div>
+              <div class="side-item"><svg class="ic"><use href="#i-grid"/></svg> Dashboard HR</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-map"/></svg> Lokasi &amp; Jam Kerja</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-users"/></svg> Master Karyawan</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-check-square"/></svg> Pusat Approval</div>
+              <div class="side-item sub"><svg class="ic"><use href="#i-clipboard"/></svg> Monitoring Absensi</div>
+              <div class="side-item sub active"><svg class="ic"><use href="#i-receipt"/></svg> Payroll</div>
+            </aside>
+            <div class="main-mock">
+              <div class="mock-head">
+                <div>
+                  <h4>Payroll</h4>
+                  <p>Buat dan kelola penggajian per periode cutoff.</p>
+                </div>
+                <span class="mock-btn"><svg class="ic" style="width:8px;height:8px"><use href="#i-plus"/></svg> Generate Payroll</span>
+              </div>
+
+              <div class="mock-toolbar">
+                <div class="mock-input">Semua Status <svg class="ic"><use href="#i-chevron-down"/></svg></div>
+              </div>
+
+              <table class="mock-table">
+                <thead><tr><th>Periode</th><th>Toko</th><th>Cutoff</th><th class="center">Karyawan</th><th class="num">Total Bersih</th><th class="center">Status</th><th class="center">Aksi</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="name">Nov 2026</span><span class="sub">Gaji November</span></td>
+                    <td>Semua Toko</td><td>01 - 30 Nov 2026</td><td class="center">42</td>
+                    <td class="num">Rp 198.400.000</td>
+                    <td class="center"><span class="pill green"><span class="d"></span>Final</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                  <tr>
+                    <td><span class="name">Des 2026</span><span class="sub">Gaji Desember</span></td>
+                    <td>Semua Toko</td><td>01 - 31 Des 2026</td><td class="center">42</td>
+                    <td class="num">Rp 201.150.000</td>
+                    <td class="center"><span class="pill amber"><span class="d"></span>Draft</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                  <tr>
+                    <td><span class="name">Okt 2026</span><span class="sub">Gaji Oktober</span></td>
+                    <td>Semua Toko</td><td>01 - 31 Okt 2026</td><td class="center">41</td>
+                    <td class="num">Rp 194.800.000</td>
+                    <td class="center"><span class="pill green"><span class="d"></span>Final</span></td>
+                    <td class="center" style="color:#0b6e4f;font-weight:700">Detail</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="card-mock" style="margin-top:8px">
+                <h5><svg class="ic"><use href="#i-plus"/></svg> Generate Payroll</h5>
+                <div class="mock-form two">
+                  <div class="field"><label>Toko</label><div class="input">Semua Toko</div></div>
+                  <div class="field"><label>Nama Periode</label><div class="input">Gaji Desember 2026</div></div>
+                  <div class="field"><label>Tanggal Cutoff Mulai</label><div class="input">01/12/2026</div></div>
+                  <div class="field"><label>Tanggal Cutoff Selesai</label><div class="input">31/12/2026</div></div>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:4px;margin-top:6px">
+                  <span class="mock-btn gray">Batal</span>
+                  <span class="mock-btn">Generate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Cara membuat payroll</div>
+        <div class="steps">
+          <div class="step">Klik <b>Generate Payroll</b>. Pilih <b>Toko</b> (atau semua toko), isi <b>Nama Periode</b>, lalu tentukan <b>Cutoff Mulai</b> dan <b>Selesai</b>.</div>
+          <div class="step">Klik <b>Generate</b>. Sistem menghitung gaji dari absensi, lembur, cuti, denda, dan kasbon pada periode itu.</div>
+          <div class="step">Jika ada pengajuan yang belum diproses, generate akan <b>diblokir</b> dan menampilkan rincian sisa cuti/lembur/koreksi/kasbon.</div>
+          <div class="step">Buka <b>Detail</b> payroll untuk memeriksa slip per karyawan.</div>
+          <div class="step">Sesuaikan <b>Bonus</b> dan <b>Potongan Lain</b> bila perlu, lalu simpan.</div>
+          <div class="step">Klik <b>Finalisasi</b>. Setelah final, slip tidak bisa diedit dan langsung muncul di aplikasi karyawan.</div>
+        </div>
+        <div class="note danger">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Finalisasi permanen</b>Saldo kasbon karyawan akan dipotong sesuai slip, dan seluruh slip pada periode tersebut terkunci. Pastikan data sudah benar.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Gaji pokok mengikuti tipe</b>Karyawan bulanan dibayar penuh lalu dipotong alpha. Karyawan harian/mingguan dibayar sesuai hari terbayar, sehingga alpha tidak dipotong dua kali. Tipe diatur di Master Karyawan.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-label" style="margin-top:26px">Detail payroll &amp; slip karyawan</div>
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="url">zeapos.id/hr-management/payrolls/12</div>
+      </div>
+      <div class="browser-body" style="min-height:auto">
+        <div class="main-mock">
+          <div class="mock-head">
+            <div>
+              <h4>Detail Payroll - Gaji Desember 2026</h4>
+              <p>Semua Toko · 01 Des 2026 s/d 31 Des 2026 · status Draft</p>
+            </div>
+            <div style="display:flex;gap:4px">
+              <span class="mock-btn alt"><svg class="ic" style="width:8px;height:8px"><use href="#i-download"/></svg> Excel</span>
+              <span class="mock-btn alt"><svg class="ic" style="width:8px;height:8px"><use href="#i-download"/></svg> CSV Bank</span>
+              <span class="mock-btn">Finalisasi</span>
+            </div>
+          </div>
+
+          <div class="stat-grid three" style="margin-bottom:8px">
+            <div class="stat blue"><span>Total Bruto</span><b style="font-size:11px">Rp 214.350.000</b></div>
+            <div class="stat red"><span>Total Potongan</span><b style="font-size:11px">Rp 13.200.000</b></div>
+            <div class="stat green"><span>Total Bersih</span><b style="font-size:11px">Rp 201.150.000</b></div>
+          </div>
+
+          <table class="mock-table">
+            <thead><tr><th>Karyawan</th><th class="center">Hadir</th><th class="center">Alpha</th><th class="num">Gaji Pokok</th><th class="num">Bruto</th><th class="center">Bonus</th><th class="center">Potongan Lain</th><th class="num">Total Potongan</th><th class="num">Bersih</th><th class="center">Aksi</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="name">Andi Pratama</span><span class="sub">Kasir · Pusat · Bulanan</span></td>
+                <td class="center">21</td><td class="center">0</td>
+                <td class="num">Rp 4.400.000</td>
+                <td class="num">Rp 5.045.000</td>
+                <td class="center">Rp 0</td><td class="center">Rp 0</td>
+                <td class="num">Rp 275.000</td><td class="num"><b>Rp 4.770.000</b></td>
+                <td class="center" style="color:#0b6e4f;font-weight:700">Edit</td>
+              </tr>
+              <tr>
+                <td><span class="name">Siti Rahma</span><span class="sub">Admin Toko · Sukamaju · Bulanan</span></td>
+                <td class="center">20</td><td class="center">0</td>
+                <td class="num">Rp 4.600.000</td>
+                <td class="num">Rp 5.600.000</td>
+                <td class="center">Rp 100.000</td><td class="center">Rp 0</td>
+                <td class="num">Rp 80.000</td><td class="num"><b>Rp 5.520.000</b></td>
+                <td class="center" style="color:#0b6e4f;font-weight:700">Edit</td>
+              </tr>
+              <tr>
+                <td><span class="name">Budi Santoso</span><span class="sub">Gudang · Pusat · Harian</span></td>
+                <td class="center">18</td><td class="center">3</td>
+                <td class="num">Rp 4.050.000</td>
+                <td class="num">Rp 4.860.000</td>
+                <td class="center">Rp 0</td><td class="center">Rp 50.000</td>
+                <td class="num">Rp 1.025.000</td><td class="num"><b>Rp 3.835.000</b></td>
+                <td class="center" style="color:#0b6e4f;font-weight:700">Edit</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size:7.5px;color:#7b8a84;margin-top:5px">Payroll masih draft. Bonus dan potongan lain bisa diedit sebelum finalisasi.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="spec">
+      <thead><tr><th>Komponen</th><th>Dihitung dari</th></tr></thead>
+      <tbody>
+        <tr><td>Gaji pokok (bulanan)</td><td>Nominal penuh per periode. Alpha dan cuti tanpa gaji dipotong dari gaji pokok.</td></tr>
+        <tr><td>Gaji pokok (mingguan)</td><td>Nominal mingguan dibagi hari kerja per minggu, lalu dikali hari terbayar.</td></tr>
+        <tr><td>Gaji pokok (harian)</td><td>Nominal harian dikali hari terbayar (hadir, telat, dan cuti berbayar).</td></tr>
+        <tr><td>Uang makan &amp; transport</td><td>Jumlah hari hadir x nominal harian.</td></tr>
+        <tr><td>Lembur</td><td>Jam lembur disetujui x tarif lembur per jam.</td></tr>
+        <tr><td>Denda telat</td><td>Jumlah kejadian telat x denda per kejadian.</td></tr>
+        <tr><td>Potongan alpha</td><td>Hari alpha x potongan harian. Hanya berlaku untuk tipe bulanan.</td></tr>
+        <tr><td>Potongan cuti tanpa gaji</td><td>Hari cuti tanpa gaji x potongan harian. Hanya berlaku untuk tipe bulanan.</td></tr>
+        <tr><td>Potongan lupa absen pulang</td><td>Kejadian lupa pulang x denda.</td></tr>
+        <tr><td>Potongan kasbon</td><td>Cicilan kasbon yang disetujui pada periode ini.</td></tr>
+      </tbody>
+    </table>
+  </article>
+</section>
+<section id="mobile">
+  <div class="chapter mobile">
+    <div class="num">2</div>
+    <div>
+      <div class="chapter-kicker">Bagian Kedua</div>
+      <h2>Aplikasi Mobile untuk Karyawan</h2>
+      <p>Aplikasi Flutter Zea HR yang dipakai sehari-hari oleh pegawai.</p>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <a href="#mobile-login">Login &amp; Sesi</a>
+    <a href="#mobile-absen">Absensi</a>
+    <a href="#mobile-riwayat">Riwayat</a>
+    <a href="#mobile-pengajuan">Pengajuan</a>
+    <a href="#mobile-slip">Slip Gaji</a>
+    <a href="#mobile-profil">Profil</a>
+  </div>
+
+  <article class="feature reveal" id="mobile-login">
+    <div class="feature-head">
+      <div class="feature-num">2.1</div>
+      <div>
+        <h3>Login &amp; Sesi</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-lock"/></svg> Layar awal aplikasi</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Karyawan masuk menggunakan username dan password yang diberikan admin. Aplikasi menyimpan
+      token login agar tidak perlu memasukkan ulang setiap membuka aplikasi. Jika sesi berakhir atau
+      token tidak lagi valid, aplikasi otomatis kembali ke halaman login dengan pemberitahuan.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="app-body" style="justify-content:center;padding:18px 20px">
+                <div style="text-align:center;margin-bottom:14px">
+                  <div style="width:64px;height:64px;border-radius:20px;margin:0 auto 10px;background:linear-gradient(145deg,#1fa67b,#074a36);display:grid;place-items:center;color:#fff;font-size:26px;font-weight:800;box-shadow:0 10px 24px rgba(11,110,79,.26)">Z</div>
+                  <div style="font-size:17px;font-weight:800;color:#074a36;letter-spacing:-.02em">Zea HR</div>
+                  <div style="font-size:8px;color:#7b8a84;margin-top:2px">Absensi &amp; HR Karyawan Zea Textile</div>
+                </div>
+                <div class="p-form">
+                  <div>
+                    <div class="p-field-label">Username</div>
+                    <div class="p-input"><span>andi.pratama</span><svg class="ic"><use href="#i-user"/></svg></div>
+                  </div>
+                  <div>
+                    <div class="p-field-label">Password</div>
+                    <div class="p-input"><span>••••••••</span><svg class="ic"><use href="#i-lock"/></svg></div>
+                  </div>
+                  <div class="p-btn" style="margin-top:6px">Masuk</div>
+                </div>
+                <div style="text-align:center;font-size:7px;color:#a9b6b0;margin-top:16px">v1.0.11</div>
+              </div>
+              <div class="snack" style="margin-bottom:14px">
+                <svg class="ic"><use href="#i-alert"/></svg>
+                <span>Sesi Anda telah berakhir. Silakan login kembali.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara login</div>
+        <div class="steps">
+          <div class="step">Buka aplikasi <b>Zea HR</b>. Jika belum pernah login, halaman login langsung tampil.</div>
+          <div class="step">Isi <b>Username</b> dan <b>Password</b> yang diberikan admin.</div>
+          <div class="step">Ketuk <b>Masuk</b>. Tunggu proses autentikasi selesai.</div>
+          <div class="step">Jika akun bukan pegawai atau tidak aktif, aplikasi menampilkan halaman <b>diblokir</b> beserta alasannya.</div>
+          <div class="step">Jika berhasil, aplikasi langsung membuka menu <b>Absen</b>.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Sesi berakhir otomatis</b>Saat server mengembalikan 401/403 (token kedaluwarsa), aplikasi menghapus data login dan kembali ke halaman ini dengan pesan "Sesi Anda telah berakhir. Silakan login kembali."</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Lupa password?</b>Password dikelola oleh admin melalui manajemen user di web. Hubungi admin untuk reset.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature reveal" id="mobile-absen">
+    <div class="feature-head">
+      <div class="feature-num">2.2</div>
+      <div>
+        <h3>Absensi (Check-in / Check-out)</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-scan"/></svg> Menu bawah → Absen</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Halaman utama karyawan. Menampilkan toko dan shift, jam server, status absensi hari ini,
+      validasi lokasi (geofence), serta kamera untuk selfie. Satu tombol berubah fungsi: Absen Masuk
+      sebelum check-in, lalu Absen Pulang setelah jam kerja.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="appbar">
+                <span class="l"></span>
+                <span class="title">Absensi</span>
+                <span class="r"><svg class="ic"><use href="#i-refresh"/></svg></span>
+              </div>
+              <div class="app-body">
+                <div class="p-card">
+                  <div class="p-row">
+                    <span class="p-ico"><svg class="ic"><use href="#i-store"/></svg></span>
+                    <div class="grow" style="flex:1">
+                      <div class="p-title">Zea Textile Pusat</div>
+                      <div class="p-sub">Shift: Shift Pagi (08:00-16:00)</div>
+                    </div>
+                    <span class="p-badge gray">Belum Absen</span>
+                  </div>
+                  <div class="p-clock">08:12:45</div>
+                  <div class="p-date">WIB · 14 Nov 2026</div>
+                </div>
+
+                <div class="p-card">
+                  <div class="p-label">Lokasi</div>
+                  <div class="p-loc">
+                    <span class="p-dot"></span>
+                    <span style="flex:1">GPS aktif · 24 m dari titik toko</span>
+                    <span style="font-weight:800;color:#0f7a45">Radius 100 m</span>
+                  </div>
+                  <div style="font-size:6.8px;color:#93a29c;margin-top:4px">Pastikan Anda berada di area toko saat absen.</div>
+                </div>
+
+                <div class="p-card">
+                  <div class="p-label">Selfie Absensi</div>
+                  <div class="selfie">
+                    <svg class="ic"><use href="#i-camera"/></svg>
+                    <span>Ketuk untuk ambil selfie</span>
+                  </div>
+                </div>
+
+                <div class="p-card" style="padding:8px 10px">
+                  <div class="p-btn">
+                    <svg class="ic"><use href="#i-scan"/></svg>
+                    Absen Masuk
+                  </div>
+                </div>
+                <div style="text-align:center;font-size:6.8px;color:#93a29c">Absensi terekam otomatis di sistem HR.</div>
+              </div>
+              <div class="p-nav">
+                <div class="item on"><svg class="ic"><use href="#i-scan"/></svg>Absen</div>
+                <div class="item"><svg class="ic"><use href="#i-history"/></svg>Riwayat</div>
+                <div class="item"><svg class="ic"><use href="#i-clipboard"/></svg>Pengajuan</div>
+                <div class="item"><svg class="ic"><use href="#i-receipt"/></svg>Slip Gaji</div>
+                <div class="item"><svg class="ic"><use href="#i-user"/></svg>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara absen</div>
+        <div class="steps">
+          <div class="step">Izinkan aplikasi mengakses <b>lokasi</b> dan <b>kamera</b> saat pertama kali diminta.</div>
+          <div class="step">Pastikan Anda berada dalam <b>radius toko</b>. Jarak dan radius tampil di kartu Lokasi.</div>
+          <div class="step">Ketuk area <b>selfie</b>, lalu ambil foto melalui kamera atau galeri.</div>
+          <div class="step">Ketuk <b>Absen Masuk</b>. Tombol akan memproses dan menampilkan notifikasi berhasil.</div>
+          <div class="step">Setelah jam kerja selesai, buka halaman ini lagi dan ketuk <b>Absen Pulang</b>.</div>
+        </div>
+        <table class="spec">
+          <thead><tr><th>Status</th><th>Artinya</th></tr></thead>
+          <tbody>
+            <tr><td>Belum Absen</td><td>Belum ada check-in hari ini.</td></tr>
+            <tr><td>Sudah Masuk</td><td>Check-in tercatat, menunggu check-out.</td></tr>
+            <tr><td>Selesai</td><td>Check-in dan check-out sudah lengkap.</td></tr>
+          </tbody>
+        </table>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Jika tombol tidak aktif</b>Periksa GPS, izin lokasi, radius, dan apakah Anda sudah absen hari ini. Kesalahan berulang bisa dikoreksi admin.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature reveal" id="mobile-riwayat">
+    <div class="feature-head">
+      <div class="feature-num">2.3</div>
+      <div>
+        <h3>Riwayat Absensi</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-history"/></svg> Menu bawah → Riwayat</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Daftar kehadiran karyawan dalam beberapa hari terakhir. Setiap baris menampilkan tanggal,
+      jam masuk dan pulang, serta status (Hadir, Terlambat, Sakit, Cuti, Alpha). Berguna untuk
+      memastikan tidak ada absensi yang hilang sebelum mengajukan koreksi.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="appbar">
+                <span class="l"></span>
+                <span class="title">Riwayat Absensi</span>
+                <span class="r"><svg class="ic"><use href="#i-refresh"/></svg></span>
+              </div>
+              <div class="app-body">
+                <div class="p-label">November 2026</div>
+                <div class="p-list">
+                  <div class="p-item">
+                    <span class="p-ico"><svg class="ic"><use href="#i-check"/></svg></span>
+                    <div class="grow">
+                      <div class="t">Sabtu, 14 Nov 2026</div>
+                      <div class="s">Masuk 08:04 · Pulang 17:02</div>
+                    </div>
+                    <span class="p-badge green">Hadir</span>
+                  </div>
+                  <div class="p-item">
+                    <span class="p-ico" style="background:#fff4df;color:#a16207"><svg class="ic"><use href="#i-clock"/></svg></span>
+                    <div class="grow">
+                      <div class="t">Jumat, 13 Nov 2026</div>
+                      <div class="s">Masuk 08:22 · Pulang 17:10</div>
+                    </div>
+                    <span class="p-badge amber">Terlambat</span>
+                  </div>
+                  <div class="p-item">
+                    <span class="p-ico"><svg class="ic"><use href="#i-check"/></svg></span>
+                    <div class="grow">
+                      <div class="t">Kamis, 12 Nov 2026</div>
+                      <div class="s">Masuk 08:00 · Pulang 17:00</div>
+                    </div>
+                    <span class="p-badge green">Hadir</span>
+                  </div>
+                  <div class="p-item">
+                    <span class="p-ico" style="background:#eaf2ff;color:#1d4ed8"><svg class="ic"><use href="#i-file"/></svg></span>
+                    <div class="grow">
+                      <div class="t">Rabu, 11 Nov 2026</div>
+                      <div class="s">Cuti tahunan disetujui</div>
+                    </div>
+                    <span class="p-badge gray">Cuti</span>
+                  </div>
+                  <div class="p-item">
+                    <span class="p-ico"><svg class="ic"><use href="#i-check"/></svg></span>
+                    <div class="grow">
+                      <div class="t">Senin, 9 Nov 2026</div>
+                      <div class="s">Masuk 07:58 · Pulang 16:05</div>
+                    </div>
+                    <span class="p-badge green">Hadir</span>
+                  </div>
+                </div>
+                <div class="p-card" style="text-align:center;padding:8px">
+                  <span style="font-size:7.5px;font-weight:700;color:#0b6e4f">Muat Lebih Banyak</span>
+                </div>
+              </div>
+              <div class="p-nav">
+                <div class="item"><svg class="ic"><use href="#i-scan"/></svg>Absen</div>
+                <div class="item on"><svg class="ic"><use href="#i-history"/></svg>Riwayat</div>
+                <div class="item"><svg class="ic"><use href="#i-clipboard"/></svg>Pengajuan</div>
+                <div class="item"><svg class="ic"><use href="#i-receipt"/></svg>Slip Gaji</div>
+                <div class="item"><svg class="ic"><use href="#i-user"/></svg>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara melihat</div>
+        <div class="steps">
+          <div class="step">Buka menu <b>Riwayat</b> di navigasi bawah.</div>
+          <div class="step">Telusuri daftar dari tanggal terbaru. Warna badge menunjukkan status kehadiran.</div>
+          <div class="step">Periksa jam masuk/pulang. Jika ada yang tidak sesuai, ajukan <b>Koreksi</b> dari menu Pengajuan.</div>
+          <div class="step">Tarik ke bawah untuk memuat ulang, atau ketuk <b>Muat Lebih Banyak</b> untuk data lama.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Warna status</b>Hijau = Hadir, kuning = Terlambat, biru = Sakit/Cuti, merah = Alpha.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature reveal" id="mobile-pengajuan">
+    <div class="feature-head">
+      <div class="feature-num">2.4</div>
+      <div>
+        <h3>Pengajuan Karyawan</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-clipboard"/></svg> Menu bawah → Pengajuan</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Satu menu dengan empat tab: <b>Cuti &amp; Izin</b>, <b>Lembur</b>, <b>Koreksi</b> absen, dan
+      <b>Kasbon</b>. Karyawan mengisi formulir, mengirim, lalu memantau status persetujuan beserta
+      catatan admin pada daftar riwayat di bawah formulir.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="appbar">
+                <span class="l"></span>
+                <span class="title">Pengajuan</span>
+                <span class="r"></span>
+              </div>
+              <div class="app-body">
+                <div class="p-tabs">
+                  <div class="p-tab on">Cuti</div>
+                  <div class="p-tab">Lembur</div>
+                  <div class="p-tab">Koreksi</div>
+                  <div class="p-tab">Kasbon</div>
+                </div>
+
+                <div class="p-card">
+                  <div class="p-title" style="margin-bottom:7px">Pengajuan Cuti / Izin</div>
+                  <div class="p-form">
+                    <div>
+                      <div class="p-field-label">Jenis</div>
+                      <div class="p-input"><span>Cuti Tahunan</span><svg class="ic"><use href="#i-chevron-down"/></svg></div>
+                    </div>
+                    <div class="p-two">
+                      <div>
+                        <div class="p-field-label">Tanggal Mulai</div>
+                        <div class="p-input"><span>18/11/2026</span><svg class="ic"><use href="#i-calendar"/></svg></div>
+                      </div>
+                      <div>
+                        <div class="p-field-label">Tanggal Selesai</div>
+                        <div class="p-input"><span>19/11/2026</span><svg class="ic"><use href="#i-calendar"/></svg></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="p-field-label">Alasan</div>
+                      <div class="p-input" style="height:40px;align-items:flex-start;color:#243b33"><span>Keperluan keluarga di luar kota.</span></div>
+                    </div>
+                    <div>
+                      <div class="p-field-label">Lampiran (opsional)</div>
+                      <div class="p-input"><span style="color:#93a29c">Pilih lampiran</span><svg class="ic"><use href="#i-file"/></svg></div>
+                    </div>
+                    <div class="p-btn">Kirim Pengajuan</div>
+                  </div>
+                </div>
+
+                <div class="p-label" style="margin-top:2px">Riwayat Pengajuan</div>
+                <div class="p-card" style="padding:8px 10px">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
+                    <div>
+                      <div style="font-size:8.5px;font-weight:800">Cuti Tahunan</div>
+                      <div style="font-size:7px;color:#7b8a84;margin-top:1px">18 Nov 2026 s/d 19 Nov 2026</div>
+                    </div>
+                    <span class="p-badge amber">Menunggu</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-nav">
+                <div class="item"><svg class="ic"><use href="#i-scan"/></svg>Absen</div>
+                <div class="item"><svg class="ic"><use href="#i-history"/></svg>Riwayat</div>
+                <div class="item on"><svg class="ic"><use href="#i-clipboard"/></svg>Pengajuan</div>
+                <div class="item"><svg class="ic"><use href="#i-receipt"/></svg>Slip Gaji</div>
+                <div class="item"><svg class="ic"><use href="#i-user"/></svg>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara mengajukan cuti / izin</div>
+        <div class="steps">
+          <div class="step">Buka menu <b>Pengajuan</b>, pilih tab <b>Cuti</b>.</div>
+          <div class="step">Pilih <b>Jenis</b>: Cuti Tahunan, Sakit, Izin, atau Cuti Tanpa Gaji.</div>
+          <div class="step">Tentukan <b>Tanggal Mulai</b> dan <b>Tanggal Selesai</b>.</div>
+          <div class="step">Tulis <b>Alasan</b> dengan jelas. Untuk jenis <b>Sakit</b>, lampiran surat keterangan wajib diisi.</div>
+          <div class="step">Ketuk <b>Kirim Pengajuan</b>. Status awal selalu <b>Menunggu</b>.</div>
+          <div class="step">Pantau hasilnya di <b>Riwayat Pengajuan</b> di bawah formulir.</div>
+        </div>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>Arti status</b><strong>Menunggu</strong> = belum diproses admin. <strong>Disetujui</strong> = pengajuan diterima. <strong>Ditolak</strong> = tidak diterima; baca catatan admin pada kartu.</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-label" style="margin-top:26px">Panduan pengisian tiap jenis pengajuan</div>
+    <table class="spec">
+      <thead><tr><th>Tab</th><th>Field yang diisi</th><th>Catatan penting</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Cuti &amp; Izin</td>
+          <td>Jenis, Tanggal Mulai, Tanggal Selesai, Alasan, Lampiran (opsional).</td>
+          <td>Jenis <b>Sakit</b> wajib melampirkan surat keterangan sakit. Cuti tahunan memotong sisa kuota cuti.</td>
+        </tr>
+        <tr>
+          <td>Lembur</td>
+          <td>Tanggal Lembur, Jam Mulai, Jam Selesai, Alasan Lembur.</td>
+          <td>Isi jam aktual lembur. Durasi dihitung otomatis dari selisih jam.</td>
+        </tr>
+        <tr>
+          <td>Koreksi</td>
+          <td>Jenis Koreksi, Tanggal Absensi, Jam Masuk/Pulang yang diajukan, Alasan, Lampiran.</td>
+          <td>Pilih <b>Telat / Dispensasi</b> untuk mengoreksi jam masuk, atau <b>Lupa Absen Pulang</b> untuk jam pulang.</td>
+        </tr>
+        <tr>
+          <td>Kasbon</td>
+          <td>Jumlah Kasbon, Cicilan per Bulan, Tanggal Kasbon, Alasan Kasbon.</td>
+          <td>Cicilan harus lebih dari 0 dan tidak boleh melebihi jumlah kasbon. Saldo dipotong pada slip gaji.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      <svg class="ic"><use href="#i-alert"/></svg>
+      <div><b>Perhatikan validasi</b>Sistem menolak pengiriman jika tanggal, jam, atau alasan belum lengkap. Untuk kasbon, cicilan harus lebih kecil atau sama dengan total kasbon.</div>
+    </div>
+
+    <div class="note tip">
+      <svg class="ic"><use href="#i-info"/></svg>
+      <div><b>Setelah dikirim</b>Pengajuan tidak dapat diubah dari aplikasi. Jika salah, hubungi admin agar diproses (disetujui/ditolak) lalu buat pengajuan baru bila perlu.</div>
+    </div>
+  </article>
+  <article class="feature reveal" id="mobile-slip">
+    <div class="feature-head">
+      <div class="feature-num">2.5</div>
+      <div>
+        <h3>Slip Gaji</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-receipt"/></svg> Menu bawah → Slip Gaji</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Karyawan melihat daftar slip gaji yang sudah difinalisasi admin. Setiap kartu menampilkan
+      periode, jumlah hari hadir, jumlah telat, dan gaji bersih. Ketuk kartu untuk membuka rincian
+      lengkap dan mengunduh slip dalam bentuk PDF.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="appbar">
+                <span class="l"></span>
+                <span class="title">Slip Gaji</span>
+                <span class="r"></span>
+              </div>
+              <div class="app-body">
+                <div class="p-list">
+                  <div class="p-card" style="padding:9px 10px">
+                    <div class="p-row">
+                      <span class="p-ico"><svg class="ic"><use href="#i-receipt"/></svg></span>
+                      <div class="grow" style="flex:1">
+                        <div class="p-title">Gaji November 2026</div>
+                        <div class="p-sub">Hadir 21 hari · Telat 1</div>
+                      </div>
+                      <div style="text-align:right">
+                        <div style="font-size:9.5px;font-weight:800;color:#0f7a45">Rp 4.770.000</div>
+                        <div style="font-size:6.5px;color:#93a29c">Gaji Bersih</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-card" style="padding:9px 10px">
+                    <div class="p-row">
+                      <span class="p-ico"><svg class="ic"><use href="#i-receipt"/></svg></span>
+                      <div class="grow" style="flex:1">
+                        <div class="p-title">Gaji Oktober 2026</div>
+                        <div class="p-sub">Hadir 22 hari · Telat 0</div>
+                      </div>
+                      <div style="text-align:right">
+                        <div style="font-size:9.5px;font-weight:800;color:#0f7a45">Rp 4.850.000</div>
+                        <div style="font-size:6.5px;color:#93a29c">Gaji Bersih</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-card" style="padding:9px 10px">
+                    <div class="p-row">
+                      <span class="p-ico"><svg class="ic"><use href="#i-receipt"/></svg></span>
+                      <div class="grow" style="flex:1">
+                        <div class="p-title">Gaji September 2026</div>
+                        <div class="p-sub">Hadir 20 hari · Telat 2</div>
+                      </div>
+                      <div style="text-align:right">
+                        <div style="font-size:9.5px;font-weight:800;color:#0f7a45">Rp 4.600.000</div>
+                        <div style="font-size:6.5px;color:#93a29c">Gaji Bersih</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-card" style="text-align:center;padding:8px">
+                  <span style="font-size:7.5px;font-weight:700;color:#0b6e4f">Muat Lebih Banyak</span>
+                </div>
+                <div class="note" style="margin-top:0;padding:7px 9px;font-size:7px;border-radius:8px;background:#f1faf6;border:1px solid #dcefe6;color:#2c433a;display:flex;gap:5px">
+                  <svg class="ic" style="width:10px;height:10px;color:#0b6e4f"><use href="#i-info"/></svg>
+                  <span>Slip muncul setelah payroll difinalisasi admin.</span>
+                </div>
+              </div>
+              <div class="p-nav">
+                <div class="item"><svg class="ic"><use href="#i-scan"/></svg>Absen</div>
+                <div class="item"><svg class="ic"><use href="#i-history"/></svg>Riwayat</div>
+                <div class="item"><svg class="ic"><use href="#i-clipboard"/></svg>Pengajuan</div>
+                <div class="item on"><svg class="ic"><use href="#i-receipt"/></svg>Slip Gaji</div>
+                <div class="item"><svg class="ic"><use href="#i-user"/></svg>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara melihat slip</div>
+        <div class="steps">
+          <div class="step">Buka menu <b>Slip Gaji</b> di navigasi bawah.</div>
+          <div class="step">Telusuri kartu slip. Kartu menampilkan periode, hadir, telat, dan gaji bersih.</div>
+          <div class="step">Ketuk kartu untuk membuka <b>rincian slip</b> dari bawah layar.</div>
+          <div class="step">Periksa <b>tipe gaji</b>, gaji pokok sesuai tipe, tunjangan, lembur, bonus, dan semua potongan.</div>
+          <div class="step">Ketuk <b>PDF</b> untuk menyimpan atau membagikan slip.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Slip belum ada?</b>Kemungkinan payroll periode tersebut belum difinalisasi admin. Hubungi admin bila periode sudah lewat.</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-grid" style="margin-top:28px">
+      <div>
+        <div class="panel-label">Rincian slip gaji</div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div style="font-size:15px;font-weight:800;color:var(--green-900)">Slip Gaji</div>
+            <span class="mock-btn" style="font-size:10px;padding:6px 12px"><svg class="ic" style="width:11px;height:11px"><use href="#i-download"/></svg> PDF</span>
+          </div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Periode</span><b>Gaji November 2026</b></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Tipe Gaji</span><b>Bulanan</b></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Nama</span><b>Andi Pratama</b></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Jabatan</span><b>Kasir</b></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Cabang</span><b>Zea Textile Pusat</b></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#7b8a84">Bank</span><b>BCA 1234567890</b></div>
+          </div>
+          <div style="height:1px;background:#eef3f0;margin:13px 0"></div>
+          <div style="display:grid;gap:5px;font-size:11.5px">
+            <div style="display:flex;justify-content:space-between"><span>Gaji Pokok (Bulanan)</span><b>Rp 4.400.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Uang Makan (21 hari)</span><b>Rp 315.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Uang Transport (21 hari)</span><b>Rp 210.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Lembur (2,0 jam)</span><b>Rp 120.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Bonus</span><b>Rp 0</b></div>
+          </div>
+          <div style="height:1px;background:#eef3f0;margin:13px 0"></div>
+          <div style="font-size:11px;font-weight:800;margin-bottom:6px">Potongan</div>
+          <div style="display:grid;gap:5px;font-size:11.5px">
+            <div style="display:flex;justify-content:space-between"><span>Denda Telat</span><b style="color:#b91c1c">- Rp 25.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Potongan Alpha</span><b style="color:#b91c1c">- Rp 0</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Potongan Cuti Tanpa Gaji</span><b style="color:#b91c1c">- Rp 0</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Potongan Lupa Absen Pulang</span><b style="color:#b91c1c">- Rp 50.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Potongan Kasbon</span><b style="color:#b91c1c">- Rp 200.000</b></div>
+            <div style="display:flex;justify-content:space-between"><span>Potongan Lain</span><b style="color:#b91c1c">- Rp 0</b></div>
+          </div>
+          <div class="total-box" style="margin-top:12px;padding:10px 12px">
+            <span style="font-size:11px">GAJI BERSIH</span>
+            <b style="font-size:15px">Rp 4.770.000</b>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Penjelasan komponen</div>
+        <table class="spec" style="margin-top:0">
+          <thead><tr><th>Komponen</th><th>Arti</th></tr></thead>
+          <tbody>
+            <tr><td>Gaji Pokok</td><td>Gaji dasar sesuai tipe penggajian. Untuk harian/mingguan, nominal menyesuaikan hari terbayar.</td></tr>
+            <tr><td>Uang Makan</td><td>Nominal harian x hari hadir.</td></tr>
+            <tr><td>Uang Transport</td><td>Nominal harian x hari hadir.</td></tr>
+            <tr><td>Lembur</td><td>Jam lembur disetujui x tarif per jam.</td></tr>
+            <tr><td>Bonus</td><td>Tambahan dari admin (bila ada).</td></tr>
+            <tr><td>Potongan</td><td>Denda telat, alpha, cuti tanpa gaji, lupa pulang, kasbon, dan potongan lain.</td></tr>
+            <tr><td>Gaji Bersih</td><td>Total pendapatan dikurangi seluruh potongan.</td></tr>
+          </tbody>
+        </table>
+        <div class="note tip">
+          <svg class="ic"><use href="#i-info"/></svg>
+          <div><b>PDF resmi</b>Tombol PDF menghasilkan slip lengkap dengan identitas perusahaan, tipe gaji, dan rincian gaji pokok, siap disimpan atau dicetak.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature reveal" id="mobile-profil">
+    <div class="feature-head">
+      <div class="feature-num">2.6</div>
+      <div>
+        <h3>Profil</h3>
+        <div class="path"><svg class="ic" style="width:11px;height:11px"><use href="#i-user"/></svg> Menu bawah → Profil</div>
+      </div>
+    </div>
+    <p class="feature-lead">
+      Menampilkan identitas karyawan, informasi pekerjaan (toko, shift, kode pegawai, tanggal
+      bergabung), dan sisa kuota cuti tahunan. Dari halaman ini juga tersedia tombol keluar
+      (logout) dari aplikasi.
+    </p>
+
+    <div class="feature-grid">
+      <div>
+        <div class="panel-label">Tampilan layar</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="status"><span>9:41</span><span class="sig">4G <span class="bat"></span></span></div>
+              <div class="appbar">
+                <span class="l"></span>
+                <span class="title">Profil</span>
+                <span class="r"></span>
+              </div>
+              <div class="app-body">
+                <div class="p-card" style="text-align:center;padding-top:14px">
+                  <div style="width:58px;height:58px;border-radius:50%;background:#e6f4ee;display:grid;place-items:center;margin:0 auto 8px">
+                    <svg class="ic" style="width:28px;height:28px;color:#0b6e4f"><use href="#i-user"/></svg>
+                  </div>
+                  <div style="font-size:12px;font-weight:800;color:#074a36">Andi Pratama</div>
+                  <div style="font-size:7.5px;color:#7b8a84;margin-top:1px">Kasir</div>
+                </div>
+
+                <div class="p-card">
+                  <div class="p-title" style="margin-bottom:6px">Informasi Pekerjaan</div>
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Toko</span><b>Zea Textile Pusat</b></div>
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Shift</span><b>Shift Pagi (08:00-16:00)</b></div>
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Kode Pegawai</span><b>ZEA-001</b></div>
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Bergabung</span><b>01 Feb 2024</b></div>
+                  </div>
+                </div>
+
+                <div class="p-card">
+                  <div class="p-title" style="margin-bottom:6px">Cuti Tahunan</div>
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Sisa Kuota</span><b style="color:#0f7a45">9 hari</b></div>
+                    <div style="display:flex;justify-content:space-between;font-size:8px"><span style="color:#7b8a84">Jatah</span><b>12 hari</b></div>
+                  </div>
+                </div>
+
+                <div class="p-btn red"><svg class="ic"><use href="#i-logout"/></svg> Keluar</div>
+                <div style="text-align:center;font-size:6.5px;color:#a9b6b0">Zea HR v1.0.11 · Zea Textile</div>
+              </div>
+              <div class="p-nav">
+                <div class="item"><svg class="ic"><use href="#i-scan"/></svg>Absen</div>
+                <div class="item"><svg class="ic"><use href="#i-history"/></svg>Riwayat</div>
+                <div class="item"><svg class="ic"><use href="#i-clipboard"/></svg>Pengajuan</div>
+                <div class="item"><svg class="ic"><use href="#i-receipt"/></svg>Slip Gaji</div>
+                <div class="item on"><svg class="ic"><use href="#i-user"/></svg>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-label">Cara menggunakan</div>
+        <div class="steps">
+          <div class="step">Buka menu <b>Profil</b> untuk melihat identitas dan jabatan.</div>
+          <div class="step">Periksa <b>Informasi Pekerjaan</b>: toko, shift, kode pegawai, dan tanggal bergabung.</div>
+          <div class="step">Lihat <b>Cuti Tahunan</b> untuk mengetahui sisa kuota sebelum mengajukan cuti.</div>
+          <div class="step">Tarik ke bawah untuk memperbarui data dari server.</div>
+          <div class="step">Ketuk <b>Keluar</b> lalu konfirmasi untuk logout dari perangkat.</div>
+        </div>
+        <div class="note warn">
+          <svg class="ic"><use href="#i-alert"/></svg>
+          <div><b>Data tidak sesuai?</b>Hubungi admin. Perubahan toko, shift, jabatan, dan kuota cuti hanya bisa dilakukan dari Master Karyawan di web admin.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+<section id="faq">
+  <div class="chapter">
+    <div class="num" style="background:var(--amber-50);color:#a16207">?</div>
+    <div>
+      <div class="chapter-kicker">Bantuan</div>
+      <h2>Pertanyaan yang sering muncul</h2>
+      <p>Solusi cepat untuk kendala yang paling sering terjadi saat operasional.</p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <details open>
+      <summary>Kenapa aplikasi tiba-tiba kembali ke halaman login?</summary>
+      <p>Sesi login sudah berakhir atau token tidak lagi valid. Aplikasi otomatis keluar dan menampilkan pesan "Sesi Anda telah berakhir. Silakan login kembali." Masuk lagi dengan username dan password Anda. Jika sering terjadi, hubungi admin untuk memeriksa konfigurasi server.</p>
+    </details>
+    <details>
+      <summary>Tombol Absen Masuk tidak bisa ditekan atau absen ditolak?</summary>
+      <p>Periksa tiga hal: izin lokasi sudah aktif, GPS dalam keadaan hidup, dan Anda berada di dalam radius toko. Pastikan juga Anda belum melakukan absen masuk hari ini. Jika masih gagal, minta admin melakukan koreksi absensi.</p>
+    </details>
+    <details>
+      <summary>Lokasi tidak terdeteksi di aplikasi mobile?</summary>
+      <p>Aktifkan GPS dan izin lokasi untuk aplikasi Zea HR. Keluar sebentar dari aplikasi lalu buka kembali, atau nyalakan lalu matikan mode pesawat. Di dalam gedung, mendekat ke jendela dapat membantu sinyal GPS.</p>
+    </details>
+    <details>
+      <summary>Pengajuan sudah dikirim, tapi statusnya masih Menunggu?</summary>
+      <p>Pengajuan menunggu diproses admin di Pusat Approval. Pantau status pada daftar Riwayat Pengajuan di aplikasi. Jika sudah lama, hubungi admin. Status akan berubah menjadi Disetujui atau Ditolak beserta catatan admin.</p>
+    </details>
+    <details>
+      <summary>Kenapa slip gaji periode ini belum muncul di aplikasi?</summary>
+      <p>Slip hanya muncul setelah admin menekan Finalisasi pada payroll periode tersebut. Jika periode sudah lewat tetapi slip tetap tidak ada, hubungi admin untuk memastikan payroll sudah difinalisasi.</p>
+    </details>
+    <details>
+      <summary>Generate payroll gagal atau diblokir?</summary>
+      <p>Artinya masih ada pengajuan pada periode tersebut yang belum diproses. Buka Pusat Approval dan selesaikan seluruh pengajuan cuti, lembur, koreksi, dan kasbon, lalu generate payroll kembali.</p>
+    </details>
+    <details>
+      <summary>Bagaimana gaji harian atau mingguan dihitung?</summary>
+      <p>Tipe penggajian diatur admin di Master Karyawan. Untuk tipe harian, gaji pokok = nominal harian x hari terbayar. Untuk tipe mingguan, gaji pokok = nominal mingguan / jumlah hari kerja per minggu x hari terbayar. Hari terbayar mencakup hadir, telat, sakit, cuti tahunan, dan dinas luar. Tipe bulanan dibayar penuh per periode, lalu alpha dan cuti tanpa gaji dipotong. Uang makan dan transport selalu dihitung dari jumlah hari hadir.</p>
+    </details>
+    <details>
+      <summary>Lupa password akun Zea HR?</summary>
+      <p>Password dikelola oleh admin melalui Manajemen User di web. Hubungi admin untuk melakukan reset password. Karyawan tidak dapat mengubah password sendiri dari aplikasi mobile.</p>
+    </details>
+    <details>
+      <summary>Apakah bisa absen dari luar area toko?</summary>
+      <p>Tidak. Absensi divalidasi dengan geofence. Jika jarak HP melebihi radius yang diatur admin, absensi akan ditolak. Pastikan Anda berada di area toko saat melakukan absen masuk maupun pulang.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="brand-mark">Z</span>
+      <span><b>Zea HR</b><small>Panduan Operasional Web Admin &amp; Aplikasi Mobile</small></span>
+    </div>
+    <div class="meta">
+      Dokumen internal Zea Textile<br>
+      Disiapkan untuk kebutuhan demo dan pelatihan pengguna
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var links = document.querySelectorAll('.topnav a[data-spy]');
+  var sections = [];
+  links.forEach(function(link){
+    var el = document.getElementById(link.getAttribute('data-spy'));
+    if (el) sections.push({el:el, link:link});
+  });
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var current = sections[0];
+    sections.forEach(function(item){
+      if (item.el.offsetTop <= pos) current = item;
+    });
+    links.forEach(function(l){ l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  document.querySelectorAll('[data-tabs]').forEach(function(group){
+    var buttons = group.querySelectorAll('.tab-btn');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        buttons.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.getAttribute('data-target');
+        var parent = group.parentElement;
+        parent.querySelectorAll('.tab-panel').forEach(function(panel){
+          panel.classList.toggle('active', panel.id === targetId);
+        });
+      });
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
